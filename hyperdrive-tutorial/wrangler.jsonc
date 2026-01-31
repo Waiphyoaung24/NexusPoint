@@ -8,20 +8,18 @@
 	"main": "src/index.ts",
 	"compatibility_date": "2026-01-28",
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	},
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
+	"compatibility_flags": ["nodejs_compat"],
 	"hyperdrive": [
 		{
 			"binding": "HYPERDRIVE_CACHED",
-			"id": "51f5c2114e91482a9dc81fd406e6d916"
+			"id": "51f5c2114e91482a9dc81fd406e6d916",
 		},
 		{
 			"binding": "HYPERDRIVE_DIRECT",
-			"id": "f51da457c16a463d989964b32f1350fd"
-		}
+			"id": "f51da457c16a463d989964b32f1350fd",
+		},
 	],
 	/**
 	 * Smart Placement
