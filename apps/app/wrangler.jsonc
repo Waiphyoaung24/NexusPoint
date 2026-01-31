@@ -19,7 +19,7 @@
   // Command: bun wrangler deploy
   "vars": {
     "ENVIRONMENT": "production",
-    "ALLOWED_ORIGINS": "https://example.com"
+    "ALLOWED_ORIGINS": "https://420man.store"
   },
 
   "env": {
@@ -37,7 +37,7 @@
     "staging": {
       "vars": {
         "ENVIRONMENT": "staging",
-        "ALLOWED_ORIGINS": "https://staging.example.com"
+        "ALLOWED_ORIGINS": "https://staging.420man.store"
       }
     },
 
@@ -46,7 +46,7 @@
     "preview": {
       "vars": {
         "ENVIRONMENT": "preview",
-        "ALLOWED_ORIGINS": "https://preview.example.com"
+        "ALLOWED_ORIGINS": "https://preview.420man.store"
       }
     }
   }

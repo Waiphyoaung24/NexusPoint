@@ -32,7 +32,7 @@
   // Command: bun wrangler deploy
   // prettier-ignore
   "routes": [
-    { "pattern": "example.com/*", "zone_name": "example.com" }
+    { "pattern": "420man.store/*", "zone_name": "420man.store" }
   ],
   "vars": {
     "ENVIRONMENT": "production"
@@ -59,7 +59,7 @@
       },
       // prettier-ignore
       "routes": [
-        { "pattern": "staging.example.com/*", "zone_name": "example.com" }
+        { "pattern": "staging.420man.store/*", "zone_name": "420man.store" }
       ]
     },
 
@@ -75,7 +75,7 @@
       },
       // prettier-ignore
       "routes": [
-        { "pattern": "preview.example.com/*", "zone_name": "example.com" }
+        { "pattern": "preview.420man.store/*", "zone_name": "420man.store" }
       ]
     }
   }

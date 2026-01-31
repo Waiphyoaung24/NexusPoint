@@ -15,14 +15,14 @@
   "vars": {
     "ENVIRONMENT": "production",
     "APP_NAME": "Example",
-    "APP_ORIGIN": "https://example.com",
-    "ALLOWED_ORIGINS": "https://example.com",
-    "RESEND_EMAIL_FROM": "onboarding@resend.dev"
+    "APP_ORIGIN": "https://420man.store",
+    "ALLOWED_ORIGINS": "https://420man.store",
+    "RESEND_EMAIL_FROM": "noreply@420man.store"
   },
   // prettier-ignore
   "hyperdrive": [
-    { "binding": "HYPERDRIVE_CACHED", "id": "your-hyperdrive-cached-id-here" },
-    { "binding": "HYPERDRIVE_DIRECT", "id": "your-hyperdrive-direct-id-here" }
+    { "binding": "HYPERDRIVE_CACHED", "id": "51f5c2114e91482a9dc81fd406e6d916" },
+    { "binding": "HYPERDRIVE_DIRECT", "id": "f51da457c16a463d989964b32f1350fd" }
   ],
   "kv_namespaces": [],
 
@@ -35,7 +35,7 @@
         "APP_NAME": "Example",
         "APP_ORIGIN": "http://localhost:5173",
         "ALLOWED_ORIGINS": "http://localhost:5173,http://127.0.0.1:5173",
-        "RESEND_EMAIL_FROM": "onboarding@resend.dev"
+        "RESEND_EMAIL_FROM": "noreply@420man.store"
       },
       // prettier-ignore
       "hyperdrive": [
@@ -51,9 +51,9 @@
       "vars": {
         "ENVIRONMENT": "staging",
         "APP_NAME": "Example",
-        "APP_ORIGIN": "https://staging.example.com",
-        "ALLOWED_ORIGINS": "https://staging.example.com",
-        "RESEND_EMAIL_FROM": "onboarding@resend.dev"
+        "APP_ORIGIN": "https://staging.420man.store",
+        "ALLOWED_ORIGINS": "https://staging.420man.store",
+        "RESEND_EMAIL_FROM": "noreply@420man.store"
       },
       // prettier-ignore
       "hyperdrive": [
@@ -69,9 +69,9 @@
       "vars": {
         "ENVIRONMENT": "preview",
         "APP_NAME": "Example",
-        "APP_ORIGIN": "https://preview.example.com",
-        "ALLOWED_ORIGINS": "https://preview.example.com",
-        "RESEND_EMAIL_FROM": "onboarding@resend.dev"
+        "APP_ORIGIN": "https://preview.420man.store",
+        "ALLOWED_ORIGINS": "https://preview.420man.store",
+        "RESEND_EMAIL_FROM": "noreply@420man.store"
       },
       // prettier-ignore
       "hyperdrive": [
