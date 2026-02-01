@@ -1,225 +1,436 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui';
+import { Button } from '@repo/ui';
+import '../styles/globals.css';
 
-const title = "Pricing - React Starter Kit";
-const description = "React Starter Kit is free and open source. Choose the support level that's right for your team.";
-
-const plans = [
-  {
-    name: "Open Source",
-    price: "$0",
-    period: "forever",
-    description: "Perfect for personal projects and learning",
-    features: [
-      "Full source code access",
-      "MIT License",
-      "Community support",
-      "GitHub issues",
-      "Regular updates",
-      "All features included"
-    ],
-    cta: "Get Started",
-    href: "https://github.com/kriasoft/react-starter-kit",
-    variant: "outline" as const
-  },
-  {
-    name: "Professional",
-    price: "$299",
-    period: "one-time",
-    description: "For teams that need priority support",
-    popular: true,
-    features: [
-      "Everything in Open Source",
-      "Priority email support",
-      "Private Discord channel",
-      "Code review sessions",
-      "Architecture consultation",
-      "Custom deployment help"
-    ],
-    cta: "Contact Sales",
-    href: "mailto:hello@kriasoft.com?subject=React Starter Kit Professional",
-    variant: "default" as const
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "contact us",
-    description: "For organizations with specific needs",
-    features: [
-      "Everything in Professional",
-      "SLA guarantees",
-      "Custom integrations",
-      "Training workshops",
-      "Dedicated support team",
-      "White-label options"
-    ],
-    cta: "Contact Us",
-    href: "mailto:hello@kriasoft.com?subject=React Starter Kit Enterprise",
-    variant: "outline" as const
-  }
-];
+// NexusPoint - Simple POS System Landing Page (Marketing Page)
+// Style: Clean, Minimal, Professional
+// Colors: White, Light Gray, Dark Gray, Soft Blue
 ---
 
-<BaseLayout title={title} description={description}>
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
-      <h1 class="text-4xl font-bold tracking-tight mb-6">
-        Simple, Transparent Pricing
-      </h1>
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        React Starter Kit is free and open source. Choose additional support
-        options based on your team's needs.
-      </p>
-    </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexusPoint - Simple Point of Sale System</title>
+    <meta name="description" content="NexusPoint is a simple, modern point-of-sale system that helps you sell faster, track inventory, and keep customers happy." />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <style>
+    :root {
+      --primary: #2563EB;
+      --primary-light: #3B82F6;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-400: #9CA3AF;
+      --gray-600: #4B5563;
+      --gray-900: #111827;
+    }
 
-    <!-- Pricing Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-      {plans.map((plan) => (
-        <Card className={plan.popular ? "border-primary shadow-lg relative" : ""} client:visible>
-          {plan.popular && (
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span class="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                MOST POPULAR
-              </span>
+    /* Simple card hover effect */
+    .card-hover {
+      transition: all 0.2s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+
+  <main class="bg-white text-gray-900 min-h-screen">
+
+    <!-- Navigation - Clean and Simple -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo - Simple text -->
+          <a href="/" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+              </svg>
             </div>
-          )}
-          <CardHeader>
-            <CardTitle className="text-2xl">{plan.name}</CardTitle>
-            <CardDescription>{plan.description}</CardDescription>
-            <div class="mt-4">
-              <span class="text-4xl font-bold">{plan.price}</span>
-              <span class="text-muted-foreground ml-2">/{plan.period}</span>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-3 mb-6">
-              {plan.features.map((feature) => (
-                <li class="flex items-start">
-                  <svg 
-                    class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      stroke-linecap="round" 
-                      stroke-linejoin="round" 
-                      stroke-width="2" 
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span class="text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <Button 
-              variant={plan.variant} 
-              className="w-full" 
-              asChild 
+            <span class="text-lg font-semibold text-gray-900">NexusPoint</span>
+          </a>
+
+          <!-- Nav Links - Simple English -->
+          <div class="hidden md:flex items-center gap-8">
+            <a href="/#features" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+            <a href="/#how-it-works" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">How it Works</a>
+            <a href="/pricing" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
+            <a href="/#devices" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Devices</a>
+          </div>
+
+          <!-- CTA - Simple button -->
+          <div class="flex items-center gap-4">
+            <a href="#" class="hidden sm:block text-sm text-gray-600 hover:text-gray-900">Sign In</a>
+            <Button
+              size="sm"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 border-0 text-sm"
               client:visible
             >
-              <a 
-                href={plan.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {plan.cta}
-              </a>
+              Get Started
             </Button>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-    <!-- FAQ Section -->
-    <section class="mb-20">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        Frequently Asked Questions
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        <Card client:visible>
-          <CardHeader>
-            <CardTitle className="text-lg">Is React Starter Kit really free?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Yes! React Starter Kit is completely free and open source under the MIT license.
-              You can use it for personal or commercial projects without any restrictions.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card client:visible>
-          <CardHeader>
-            <CardTitle className="text-lg">What's included in support?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Professional and Enterprise support includes direct access to our team for
-              technical questions, code reviews, and deployment assistance.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card client:visible>
-          <CardHeader>
-            <CardTitle className="text-lg">Can I upgrade later?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Absolutely! You can start with the open source version and upgrade to
-              Professional or Enterprise support whenever you need it.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card client:visible>
-          <CardHeader>
-            <CardTitle className="text-lg">Do you offer custom development?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Yes, our Enterprise plan includes custom development and integration services.
-              Contact us to discuss your specific requirements.
-            </p>
-          </CardContent>
-        </Card>
+    <!-- Hero Section - Clean and Simple -->
+    <section class="relative pt-22 pb-10   lg:pt-22 lg:pb-10">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6 text-gray-900">
+            Pricing
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Choose the plan that's right for you.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="text-center bg-muted/20 rounded-lg p-12">
-      <h2 class="text-3xl font-bold tracking-tight mb-4">
-        Ready to Build Something Amazing?
-      </h2>
-      <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-        Start with our free open source version and upgrade when you need
-        professional support.
-      </p>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 lg:py-10 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex justify-center items-center mb-12">
+          <span class="text-sm font-medium text-gray-600">USD</span>
+          <label for="currency-toggle" class="relative inline-flex items-center cursor-pointer mx-4">
+            <input type="checkbox" id="currency-toggle" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:bg-blue-600"></div>
+            <div class="absolute left-1 top-1 bg-white border-gray-300 border rounded-full h-4 w-4 transition-all peer-checked:translate-x-full peer-checked:border-white"></div>
+          </label>
+          <span class="text-sm font-medium text-gray-600">THB</span>
+        </div>
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button size="lg" asChild client:visible>
-          <a
-            href="https://github.com/kriasoft/react-starter-kit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Start Building for Free
-          </a>
-        </Button>
-        <Button variant="outline" size="lg" asChild client:visible>
-          <a
-            href="mailto:hello@kriasoft.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Contact Sales
-          </a>
-        </Button>
+        <div id="usd-plans" class="grid md:grid-cols-3 gap-8">
+          <!-- Standard Plan -->
+          <div class="bg-white rounded-xl p-8 border border-gray-200 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Standard Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              For small businesses.
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              $49 <span class="text-lg font-medium text-gray-500">/ month</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                100 Products
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                5 Staff Accounts
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Email Support
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              Choose Plan
+            </Button>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="bg-white rounded-xl p-8 border border-blue-600 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Pro Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              For medium businesses.
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              $99 <span class="text-lg font-medium text-gray-500">/ month</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Unlimited Products
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Unlimited Staff Accounts
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Priority Support
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              Choose Plan
+            </Button>
+          </div>
+
+          <!-- Max Plan -->
+          <div class="bg-white rounded-xl p-8 border border-gray-200 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Max Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              For large businesses.
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              $199 <span class="text-lg font-medium text-gray-500">/ month</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Unlimited Everything
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                24/7 Dedicated Support
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Custom Features
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              Choose Plan
+            </Button>
+          </div>
+        </div>
+
+        <div id="thb-plans" class="hidden grid md:grid-cols-3 gap-8">
+          <!-- Standard Plan (THB) -->
+          <div class="bg-white rounded-xl p-8 border border-gray-200 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Standard Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              สำหรับธุรกิจขนาดเล็ก
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              ฿1,499 <span class="text-lg font-medium text-gray-500">/ เดือน</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                100 สินค้า
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                5 พนักงาน
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                การสนับสนุนทางอีเมล
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              เลือกแผน
+            </Button>
+          </div>
+
+          <!-- Pro Plan (THB) -->
+          <div class="bg-white rounded-xl p-8 border border-blue-600 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Pro Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              สำหรับธุรกิจขนาดกลาง
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              ฿2,999 <span class="text-lg font-medium text-gray-500">/ เดือน</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                ไม่จำกัดสินค้า
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                ไม่จำกัดพนักงาน
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                การสนับสนุนพิเศษ
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              เลือกแผน
+            </Button>
+          </div>
+
+          <!-- Max Plan (THB) -->
+          <div class="bg-white rounded-xl p-8 border border-gray-200 card-hover">
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Max Plan</h3>
+            <p class="text-gray-500 text-sm mb-6">
+              สำหรับธุรกิจขนาดใหญ่
+            </p>
+            <div class="text-4xl font-bold mb-6">
+              ฿5,999 <span class="text-lg font-medium text-gray-500">/ เดือน</span>
+            </div>
+            <ul class="text-gray-600 text-sm space-y-4 mb-8">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                ไม่จำกัดทุกอย่าง
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                การสนับสนุน 24/7
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                ฟีเจอร์ที่กำหนดเอง
+              </li>
+            </ul>
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 border-0"
+              client:visible
+            >
+              เลือกแผน
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
-</BaseLayout>
+
+    <script>
+      const toggle = document.getElementById('currency-toggle');
+      const usdPlans = document.getElementById('usd-plans');
+      const thbPlans = document.getElementById('thb-plans');
+
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          usdPlans.classList.add('hidden');
+          thbPlans.classList.remove('hidden');
+        } else {
+          usdPlans.classList.remove('hidden');
+          thbPlans.classList.add('hidden');
+        }
+      });
+    </script>
+
+
+    <!-- Footer - Clean and Simple -->
+    <footer class="py-12 border-t border-gray-200 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8 mb-12">
+          <!-- Brand -->
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                </svg>
+              </div>
+              <span class="font-semibold text-gray-900">NexusPoint</span>
+            </div>
+            <p class="text-sm text-gray-500">
+              Simple, modern point-of-sale for retail and restaurants.
+            </p>
+          </div>
+
+          <!-- Product -->
+          <div>
+            <h4 class="font-medium mb-4 text-gray-900">Product</h4>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Features</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Pricing</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Integrations</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">API</a></li>
+            </ul>
+          </div>
+
+          <!-- Company -->
+          <div>
+            <h4 class="font-medium mb-4 text-gray-900">Company</h4>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li><a href="#" class="hover:text-gray-900 transition-colors">About</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Blog</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Careers</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h4 class="font-medium mb-4 text-gray-900">Support</h4>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Help Center</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Contact Us</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Status</a></li>
+              <li><a href="#" class="hover:text-gray-900 transition-colors">Security</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p class="text-sm text-gray-500">
+              © 2026 NexusPoint. All rights reserved.
+            </p>
+            <span class="hidden sm:inline text-gray-300">|</span>
+            <p class="text-sm text-gray-400">
+              Powered by <span class="text-blue-600 font-medium">NexusLab</span>
+            </p>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Privacy</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Terms</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+  </body>
+</html>
