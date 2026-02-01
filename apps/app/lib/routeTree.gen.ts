@@ -14,6 +14,7 @@ import { Route as appIndexRouteImport } from './../routes/(app)/index'
 import { Route as authSignupRouteImport } from './../routes/(auth)/signup'
 import { Route as authLoginRouteImport } from './../routes/(auth)/login'
 import { Route as appUsersRouteImport } from './../routes/(app)/users'
+import { Route as appTestRouteImport } from './../routes/(app)/test'
 import { Route as appSettingsRouteImport } from './../routes/(app)/settings'
 import { Route as appReportsRouteImport } from './../routes/(app)/reports'
 import { Route as appDashboardRouteImport } from './../routes/(app)/dashboard'
@@ -42,6 +43,11 @@ const authLoginRoute = authLoginRouteImport.update({
 const appUsersRoute = appUsersRouteImport.update({
   id: '/users',
   path: '/users',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appTestRoute = appTestRouteImport.update({
+  id: '/test',
+  path: '/test',
   getParentRoute: () => appRouteRoute,
 } as any)
 const appSettingsRoute = appSettingsRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof appDashboardRoute
   '/reports': typeof appReportsRoute
   '/settings': typeof appSettingsRoute
+  '/test': typeof appTestRoute
   '/users': typeof appUsersRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof appDashboardRoute
   '/reports': typeof appReportsRoute
   '/settings': typeof appSettingsRoute
+  '/test': typeof appTestRoute
   '/users': typeof appUsersRoute
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/(app)/dashboard': typeof appDashboardRoute
   '/(app)/reports': typeof appReportsRoute
   '/(app)/settings': typeof appSettingsRoute
+  '/(app)/test': typeof appTestRoute
   '/(app)/users': typeof appUsersRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/signup': typeof authSignupRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/reports'
     | '/settings'
+    | '/test'
     | '/users'
     | '/login'
     | '/signup'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/reports'
     | '/settings'
+    | '/test'
     | '/users'
     | '/login'
     | '/signup'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/(app)/dashboard'
     | '/(app)/reports'
     | '/(app)/settings'
+    | '/(app)/test'
     | '/(app)/users'
     | '/(auth)/login'
     | '/(auth)/signup'
@@ -185,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appUsersRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/test': {
+      id: '/(app)/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof appTestRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/(app)/settings': {
       id: '/(app)/settings'
       path: '/settings'
@@ -229,6 +248,7 @@ interface appRouteRouteChildren {
   appDashboardRoute: typeof appDashboardRoute
   appReportsRoute: typeof appReportsRoute
   appSettingsRoute: typeof appSettingsRoute
+  appTestRoute: typeof appTestRoute
   appUsersRoute: typeof appUsersRoute
   appIndexRoute: typeof appIndexRoute
 }
@@ -239,6 +259,7 @@ const appRouteRouteChildren: appRouteRouteChildren = {
   appDashboardRoute: appDashboardRoute,
   appReportsRoute: appReportsRoute,
   appSettingsRoute: appSettingsRoute,
+  appTestRoute: appTestRoute,
   appUsersRoute: appUsersRoute,
   appIndexRoute: appIndexRoute,
 }
