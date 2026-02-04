@@ -21,6 +21,9 @@ i18n
     supportedLngs: ["en", "th"],
     interpolation: {
       escapeValue: false,
+      defaultVariables: {
+        appName: import.meta.env.VITE_APP_NAME || "NexusPoint",
+      },
     },
     detection: {
       order: ["localStorage", "navigator"],

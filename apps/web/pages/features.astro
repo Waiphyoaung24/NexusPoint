@@ -2,8 +2,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui';
 
-const title = "Features - React Starter Kit";
-const description = "Explore all the powerful features that make React Starter Kit the perfect foundation for your next project.";
+const title = "Features - {import.meta.env.APP_NAME || 'NexusPoint'}";
+const description = "Explore all the powerful features that make {import.meta.env.APP_NAME || 'NexusPoint'} the perfect foundation for your next project.";
 
 const featureCategories = [
   {
@@ -253,7 +253,7 @@ function UserProfile({ userId }: Props) {
         Experience the Difference
       </h2>
       <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-        See why developers choose React Starter Kit for their most important projects.
+        See why developers choose {import.meta.env.APP_NAME || 'NexusPoint'} for their most important projects.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">

@@ -9,7 +9,7 @@
     "users": "Users",
     "integrations": "Integrations",
     "syncLogs": "Sync Logs",
-    "bridgeIntegration": "Bridge & Integration",
+    "bridgeIntegration": "{{appName}}",
     "management": "Management"
   },
   "header": {

@@ -14,8 +14,9 @@ const $ = execa({ cwd: rootDir });
  * @see https://code.visualstudio.com/docs/copilot/chat/mcp-servers
  */
 const server = new McpServer({
-  name: "React Starter Kit",
-  version: "0.0.0",
+  name: "NexusPoint",
+  version: "1.0.0",
+  description: "The official NexusPoint MCP server",
 });
 
 // This is just an example of a custom command that can be executed

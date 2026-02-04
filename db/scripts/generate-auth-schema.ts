@@ -13,7 +13,7 @@ async function generateAuthSchema() {
 
   // Create the auth instance to get the configuration
   const auth = createAuth(mockDb, {
-    APP_NAME: env.APP_NAME || "React Starter Kit",
+    APP_NAME: env.APP_NAME || "NexusPoint",
     APP_ORIGIN: env.APP_ORIGIN || "http://localhost:3000",
     BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET || "mock-secret",
     GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID || "mock-client-id",

@@ -17,7 +17,7 @@
     "dev": "bun --filter @repo/web --filter @repo/api --filter @repo/app dev",
     "lint": "eslint --cache --report-unused-disable-directives .",
     "test": "vitest",
-    "typecheck": "tsc --build",
+    "typecheck": "tsr generate && tsc --build",
     "build:types": "tsc --build",
     "build": "bun --filter @repo/email --filter @repo/web --filter @repo/api --filter @repo/app build",
     "generate:types": "bun wrangler types --config apps/api/wrangler.jsonc --include-runtime=false apps/api/types/cloudflare-env.d.ts && bun prettier --write apps/api/types/*-env.d.ts",

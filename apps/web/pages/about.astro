@@ -2,8 +2,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Separator } from '@repo/ui';
 
-const title = "About - React Starter Kit";
-const description = "Learn about React Starter Kit, a production-ready full-stack web application template built with modern technologies.";
+const title = "About - {import.meta.env.APP_NAME || 'NexusPoint'}";
+const description = "Learn about {import.meta.env.APP_NAME || 'NexusPoint'}, a production-ready full-stack web application template built with modern technologies.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -11,7 +11,7 @@ const description = "Learn about React Starter Kit, a production-ready full-stac
     <!-- Hero Section -->
     <div class="text-center mb-16">
       <h1 class="text-4xl font-bold tracking-tight mb-6">
-        About React Starter Kit
+        About {import.meta.env.APP_NAME || 'NexusPoint'}
       </h1>
       <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
         A production-ready, full-stack web application template that combines
@@ -31,7 +31,7 @@ const description = "Learn about React Starter Kit, a production-ready full-stac
         </CardHeader>
         <CardContent className="space-y-4">
           <p class="text-muted-foreground">
-            React Starter Kit was created to bridge the gap between prototype
+            {import.meta.env.APP_NAME || 'NexusPoint'} was created to bridge the gap between prototype
             and production. We believe that developers should focus on
             building great features, not wrestling with configuration and
             setup.
@@ -194,7 +194,7 @@ const description = "Learn about React Starter Kit, a production-ready full-stac
       <Card client:visible>
         <CardContent className="pt-6 text-center">
           <p class="text-muted-foreground mb-6">
-            React Starter Kit is maintained by Kriasoft, a team of experienced
+            {import.meta.env.APP_NAME || 'NexusPoint'} is maintained by Kriasoft, a team of experienced
             developers passionate about modern web technologies and developer
             experience.
           </p>
@@ -231,7 +231,7 @@ const description = "Learn about React Starter Kit, a production-ready full-stac
         Ready to Get Started?
       </h2>
       <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-        Join thousands of developers who have chosen React Starter Kit for
+        Join thousands of developers who have chosen {import.meta.env.APP_NAME || 'NexusPoint'} for
         their next project.
       </p>
 

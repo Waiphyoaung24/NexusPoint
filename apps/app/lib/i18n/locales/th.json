@@ -9,7 +9,7 @@
     "users": "ผู้ใช้งาน",
     "integrations": "การเชื่อมต่อ",
     "syncLogs": "บันทึกการซิงค์",
-    "bridgeIntegration": "เชื่อมต่อและบริดจ์",
+    "bridgeIntegration": "{{appName}}",
     "management": "การจัดการ"
   },
   "header": {

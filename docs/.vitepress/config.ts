@@ -5,7 +5,7 @@ import { defineConfig } from "vitepress";
  * @see https://vitepress.dev/reference/site-config
  */
 export default defineConfig({
-  title: "React Starter Kit",
+  title: "NexusPoint",
   description: "Production-ready monorepo for building fast web apps",
 
   markdown: {
@@ -34,7 +34,7 @@ export default defineConfig({
   head: [
     ["meta", { name: "theme-color", content: "#6366f1" }],
     ["meta", { property: "og:type", content: "website" }],
-    ["meta", { property: "og:site_name", content: "React Starter Kit" }],
+    ["meta", { property: "og:site_name", content: "NexusPoint" }],
   ],
 
   themeConfig: {

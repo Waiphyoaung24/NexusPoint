@@ -36,8 +36,8 @@ const colors = {
 export function BaseTemplate({
   preview,
   children,
-  appName = "React Starter Kit",
-  appUrl = "https://example.com",
+  appName = process.env.APP_NAME || "NexusPoint",
+  appUrl,
 }: BaseTemplateProps) {
   // Embedded SVG logo as data URI for better email compatibility
   const logoDataUri =

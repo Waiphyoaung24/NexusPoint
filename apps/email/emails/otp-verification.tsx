@@ -5,7 +5,7 @@ export default function OTPVerificationPreview() {
     <OTPEmail
       otp="789012"
       type="email-verification"
-      appName="React Starter Kit"
+      appName="NexusPoint"
       appUrl="https://example.com"
     />
   );

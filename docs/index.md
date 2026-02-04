@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "React Starter Kit"
-  # text: "Production-ready monorepo for building fast web apps"
+  name: "NexusPoint"
+  text: "Production-ready, full-stack web application template"
   tagline: Skip months of setup and ship your AI-powered SaaS fast. Authentication, database migrations, edge deployment, and cutting-edge React patterns all configured with industry best practices.
   actions:
     - theme: brand

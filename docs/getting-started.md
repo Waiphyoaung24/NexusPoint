@@ -1,6 +1,6 @@
 # Getting Started
 
-Welcome to **React Starter Kit** — your shortcut to building modern web apps without the usual setup headaches. This guide will get you from zero to hero faster than you can say "webpack configuration" (which, thankfully, you won't have to).
+Welcome to **NexusPoint** — your shortcut to building modern web apps without the usual setup headaches. This guide will get you from zero to hero faster than you can say "webpack configuration" (which, thankfully, you won't have to).
 
 ::: tip Quick Start
 Just want to dive in? Run these commands and you're good to go:

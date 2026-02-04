@@ -1,6 +1,6 @@
 # Security Incident Response Playbook
 
-This playbook provides step-by-step procedures for handling security incidents in React Starter Kit projects. Each procedure includes specific actions, tools, and decision criteria.
+This playbook provides step-by-step procedures for handling security incidents in NexusPoint projects. Each procedure includes specific actions, tools, and decision criteria.
 
 ## Quick Reference
 
@@ -126,7 +126,7 @@ Is remote code execution possible?
 
 ### Summary
 
-We are investigating a security vulnerability in React Starter Kit.
+We are investigating a security vulnerability in NexusPoint.
 
 ### Temporary Mitigation
 
@@ -269,7 +269,7 @@ Reported by [Name] ([Organization])
 **Communication Template:**
 
 ```
-Subject: [ACTION REQUIRED] Security Update for React Starter Kit
+Subject: [ACTION REQUIRED] Security Update for NexusPoint
 
 A critical security vulnerability has been discovered and patched.
 
