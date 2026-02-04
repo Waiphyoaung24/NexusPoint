@@ -1,4 +1,4 @@
-# React Starter Kit
+# NexusPoint
 
 <a href="https://github.com/kriasoft/react-starter-kit?sponsor=1"><img src="https://img.shields.io/badge/-GitHub-%23555.svg?logo=github-sponsors" height="20"></a>
 <a href="https://discord.gg/2nKEnKq"><img src="https://img.shields.io/discord/643523529131950086?label=Chat" height="20"></a>
@@ -6,11 +6,11 @@
 <a href="https://github.com/kriasoft/react-starter-kit/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-starter-kit.svg?style=social&label=Star&maxAge=3600" height="20"></a>
 <a href="https://x.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
-Building modern web applications shouldn't require weeks of configuration hell. This React Starter Kit eliminates the tedious setup work so you can focus on what matters: shipping great products.
+Building modern web applications shouldn't require weeks of configuration hell. This NexusPoint eliminates the tedious setup work so you can focus on what matters: shipping great products.
 
 Designed for developers who value both speed and quality, this template provides a complete foundation for full-stack applications. From solo projects to team collaborations, it scales with your ambitions while maintaining the developer experience you deserve.
 
-React Starter Kit is proudly supported by these amazing sponsors:
+NexusPoint is proudly supported by these amazing sponsors:
 
 <a href="https://reactstarter.com/s/1"><img src="https://reactstarter.com/s/1.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/s/2"><img src="https://reactstarter.com/s/2.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/s/3"><img src="https://reactstarter.com/s/3.png" height="60" /></a>
 
@@ -33,7 +33,7 @@ React Starter Kit is proudly supported by these amazing sponsors:
 
 ---
 
-This project was bootstrapped with [React Starter Kit](https://github.com/kriasoft/react-starter-kit).
+This project was bootstrapped with [NexusPoint](https://github.com/kriasoft/react-starter-kit).
 Be sure to join our [Discord channel](https://discord.gg/2nKEnKq) for assistance.
 
 ## Technology Stack

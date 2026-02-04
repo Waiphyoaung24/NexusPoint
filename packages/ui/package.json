@@ -1,7 +1,7 @@
 {
   "name": "@repo/ui",
   "version": "0.1.0",
-  "description": "Reusable UI components for React Starter Kit (monorepo)",
+  "description": "Reusable UI components for NexusPoint (monorepo)",
   "type": "module",
   "main": "./index.ts",
   "types": "./index.ts",

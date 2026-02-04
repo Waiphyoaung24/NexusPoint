@@ -1,6 +1,6 @@
 # @repo/ui
 
-Reusable UI components for the React Starter Kit monorepo. Built with React 19, TypeScript, and Tailwind CSS because we believe in using components that actually work.
+Reusable UI components for the NexusPoint monorepo. Built with React 19, TypeScript, and Tailwind CSS because we believe in using components that actually work.
 
 ## What's Inside?
 

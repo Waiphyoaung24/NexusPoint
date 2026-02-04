@@ -1,6 +1,6 @@
 # Security Best Practices Checklist
 
-A comprehensive security checklist for React Starter Kit applications. Review this checklist during development, before deployment, and regularly in production.
+A comprehensive security checklist for NexusPoint applications. Review this checklist during development, before deployment, and regularly in production.
 
 ## Development Phase
 
