@@ -1,35 +1,25 @@
 # NexusPoint
 
-<a href="https://github.com/kriasoft/react-starter-kit?sponsor=1"><img src="https://img.shields.io/badge/-GitHub-%23555.svg?logo=github-sponsors" height="20"></a>
-<a href="https://discord.gg/2nKEnKq"><img src="https://img.shields.io/discord/643523529131950086?label=Chat" height="20"></a>
-<a href="https://chatgpt.com/g/g-69564f0a23088191846aa4072bd9397d-react-starter-kit-assistant"><img src="https://img.shields.io/badge/Ask_ChatGPT-10a37f?logo=google+gemini&logoColor=white" height="20"></a>
-<a href="https://github.com/kriasoft/react-starter-kit/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-starter-kit.svg?style=social&label=Star&maxAge=3600" height="20"></a>
-<a href="https://x.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+Building modern Point of Sale (POS) systems shouldn't require weeks of configuration hell. NexusPoint is a high-performance, multi-tenant POS platform that eliminates the tedious setup work so you can focus on what matters: delivering a seamless commerce experience.
 
-Building modern web applications shouldn't require weeks of configuration hell. This NexusPoint eliminates the tedious setup work so you can focus on what matters: shipping great products.
-
-Designed for developers who value both speed and quality, this template provides a complete foundation for full-stack applications. From solo projects to team collaborations, it scales with your ambitions while maintaining the developer experience you deserve.
-
-NexusPoint is proudly supported by these amazing sponsors:
-
-<a href="https://reactstarter.com/s/1"><img src="https://reactstarter.com/s/1.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/s/2"><img src="https://reactstarter.com/s/2.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/s/3"><img src="https://reactstarter.com/s/3.png" height="60" /></a>
+Designed for businesses that value both speed and reliability, NexusPoint provides a complete foundation for modern retail and restaurant applications. From single-location shops to global franchises, it scales with your ambitions while maintaining the best-in-class developer experience you deserve.
 
 ## What You Get
 
-- **Performance by Default**: Bun runtime delivers exceptional speed across development and production. Your build times will thank you.
-- **Type Safety Throughout**: TypeScript and tRPC create an unbreakable contract between frontend and backend. Catch errors at compile time, not in production.
-- **Modern React Stack**: React 19 with TanStack Router provides type-safe navigation and powerful data fetching patterns. Tailwind CSS v4 handles styling with zero configuration.
-- **Edge-Native Deployment**: Cloudflare Workers ensure your app runs close to users worldwide. Experience sub-100ms response times globally.
-- **Database Ready**: Drizzle ORM with Neon PostgreSQL provides a complete data layer. Multi-tenant support included out of the box.
-- **Developer Experience**: ESLint, Prettier, and VSCode configurations eliminate bikeshedding. Focus on features, not formatting.
+- **Performance by Default**: Bun runtime delivers exceptional speed across development and production. Experience lightning-fast checkout processes and inventory updates.
+- **Type Safety Throughout**: TypeScript and tRPC create an unbreakable contract between frontend and backend. Catch errors at compile time, ensuring reliable transactions.
+- **Modern React Stack**: React 19 with TanStack Router provides type-safe navigation and powerful data fetching patterns for real-time order management.
+- **Edge-Native Deployment**: Cloudflare Workers ensure your POS runs close to your stores worldwide. Experience sub-100ms response times globally.
+- **Database Ready**: Drizzle ORM with Neon PostgreSQL provides a complete data layer. Multi-tenant and multi-branch support included out of the box.
+- **Developer Experience**: ESLint, Prettier, and VSCode configurations eliminate bikeshedding. Focus on business logic, not formatting.
 
 ## Perfect For
 
-- **SaaS Applications**: Multi-tenant architecture with user management built-in
-- **API-First Products**: tRPC provides excellent developer experience for API development
-- **Global Applications**: Edge deployment ensures fast loading times worldwide
-- **Team Projects**: Monorepo structure scales well with multiple developers
-- **Rapid Prototyping**: Skip configuration and start building features immediately
+- **Retail & Restaurant Chains**: Multi-tenant architecture with robust multi-branch and inventory management.
+- **SaaS POS Providers**: A solid foundation for building your own specialized commerce platform.
+- **Global Franchises**: Edge deployment ensures consistent performance across all geographic locations.
+- **Rapid Prototyping**: Skip configuration and start building specialized POS features immediately.
+- **Omnichannel Commerce**: Unified order management across POS, web, and third-party delivery integrations.
 
 ---
 
