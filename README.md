@@ -1,25 +1,25 @@
 # NexusPoint
 
-Building modern web applications shouldn't require weeks of configuration hell. This NexusPoint eliminates the tedious setup work so you can focus on what matters: shipping great products.
+Building modern Point of Sale (POS) systems shouldn't require weeks of configuration hell. NexusPoint is a high-performance, multi-tenant POS platform that eliminates the tedious setup work so you can focus on what matters: delivering a seamless commerce experience.
 
-Designed for developers who value both speed and quality, this template provides a complete foundation for full-stack applications. From solo projects to team collaborations, it scales with your ambitions while maintaining the developer experience you deserve.
+Designed for businesses that value both speed and reliability, NexusPoint provides a complete foundation for modern retail and restaurant applications. From single-location shops to global franchises, it scales with your ambitions while maintaining the best-in-class developer experience you deserve.
 
 ## What You Get
 
-- **Performance by Default**: Bun runtime delivers exceptional speed across development and production. Your build times will thank you.
-- **Type Safety Throughout**: TypeScript and tRPC create an unbreakable contract between frontend and backend. Catch errors at compile time, not in production.
-- **Modern React Stack**: React 19 with TanStack Router provides type-safe navigation and powerful data fetching patterns. Tailwind CSS v4 handles styling with zero configuration.
-- **Edge-Native Deployment**: Cloudflare Workers ensure your app runs close to users worldwide. Experience sub-100ms response times globally.
-- **Database Ready**: Drizzle ORM with Neon PostgreSQL provides a complete data layer. Multi-tenant support included out of the box.
-- **Developer Experience**: ESLint, Prettier, and VSCode configurations eliminate bikeshedding. Focus on features, not formatting.
+- **Performance by Default**: Bun runtime delivers exceptional speed across development and production. Experience lightning-fast checkout processes and inventory updates.
+- **Type Safety Throughout**: TypeScript and tRPC create an unbreakable contract between frontend and backend. Catch errors at compile time, ensuring reliable transactions.
+- **Modern React Stack**: React 19 with TanStack Router provides type-safe navigation and powerful data fetching patterns for real-time order management.
+- **Edge-Native Deployment**: Cloudflare Workers ensure your POS runs close to your stores worldwide. Experience sub-100ms response times globally.
+- **Database Ready**: Drizzle ORM with Neon PostgreSQL provides a complete data layer. Multi-tenant and multi-branch support included out of the box.
+- **Developer Experience**: ESLint, Prettier, and VSCode configurations eliminate bikeshedding. Focus on business logic, not formatting.
 
 ## Perfect For
 
-- **SaaS Applications**: Multi-tenant architecture with user management built-in
-- **API-First Products**: tRPC provides excellent developer experience for API development
-- **Global Applications**: Edge deployment ensures fast loading times worldwide
-- **Team Projects**: Monorepo structure scales well with multiple developers
-- **Rapid Prototyping**: Skip configuration and start building features immediately
+- **Retail & Restaurant Chains**: Multi-tenant architecture with robust multi-branch and inventory management.
+- **SaaS POS Providers**: A solid foundation for building your own specialized commerce platform.
+- **Global Franchises**: Edge deployment ensures consistent performance across all geographic locations.
+- **Rapid Prototyping**: Skip configuration and start building specialized POS features immediately.
+- **Omnichannel Commerce**: Unified order management across POS, web, and third-party delivery integrations.
 
 ---
 
