@@ -1,4 +1,6 @@
 import { useTranslation } from "react-i18next";
+import { useAtomValue } from "jotai";
+import { useQuery } from "@tanstack/react-query";
 import {
   Card,
   CardContent,
@@ -20,6 +22,8 @@ import {
   Grab,
   History,
 } from "lucide-react";
+import { currentBranchAtom } from "@/lib/store";
+import { api } from "@/lib/trpc";
 
 export const Route = createFileRoute("/(app)/")({
   component: Dashboard,
@@ -27,26 +31,43 @@ export const Route = createFileRoute("/(app)/")({
 
 function Dashboard() {
   const { t } = useTranslation();
+  const currentBranch = useAtomValue(currentBranchAtom);
+
+  // Fetch dashboard stats from API
+  const { data: statsData, isLoading } = useQuery(
+    api.dashboard.getStats.queryOptions(
+      currentBranch ? { branchId: currentBranch.id } : undefined,
+      {
+        staleTime: 30_000, // Cache for 30 seconds
+      },
+    ),
+  );
 
   const stats = [
     {
       titleKey: "dashboard.revenue",
-      value: "฿1,234,567",
+      value: isLoading
+        ? "..."
+        : `฿${Number(statsData?.revenue || 0).toLocaleString()}`,
       icon: DollarSign,
     },
     {
       titleKey: "dashboard.totalOrders",
-      value: "8,910",
+      value: isLoading
+        ? "..."
+        : statsData?.totalOrders?.toLocaleString() || "0",
       icon: ShoppingCart,
     },
     {
       titleKey: "dashboard.activeItems",
-      value: "฿138.50",
+      value: isLoading
+        ? "..."
+        : statsData?.activeItems?.toLocaleString() || "0",
       icon: BarChart,
     },
     {
       titleKey: "users.totalUsers",
-      value: "123",
+      value: isLoading ? "..." : statsData?.totalUsers?.toLocaleString() || "0",
       icon: Users,
     },
   ];

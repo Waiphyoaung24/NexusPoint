@@ -14,6 +14,8 @@
   },
   "header": {
     "selectBranch": "Select a branch",
+    "selectOrganization": "Select an organization",
+    "noOrganization": "No organization selected",
     "syncStatus": "Sync Status"
   },
   "dashboard": {

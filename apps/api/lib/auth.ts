@@ -83,6 +83,19 @@ export function createAuth(
       modelName: "identity",
     },
 
+    session: {
+      additionalFields: {
+        activeOrganizationId: {
+          type: "string",
+          required: false,
+        },
+        activeTeamId: {
+          type: "string",
+          required: false,
+        },
+      },
+    },
+
     // Email and password authentication
     emailAndPassword: {
       enabled: true,
@@ -185,4 +198,7 @@ export type Auth = ReturnType<typeof betterAuth>;
 // Base session types from Better Auth - plugin-specific fields added at runtime
 type SessionResponse = Auth["$Infer"]["Session"];
 export type AuthUser = SessionResponse["user"];
-export type AuthSession = SessionResponse["session"];
+export type AuthSession = SessionResponse["session"] & {
+  activeOrganizationId?: string | null;
+  activeTeamId?: string | null;
+};

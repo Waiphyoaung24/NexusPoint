@@ -1,13 +1,56 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { eq, and } from "drizzle-orm";
+import { member, organization, session } from "@repo/db";
 import { protectedProcedure, router } from "../lib/trpc.js";
 
 export const organizationRouter = router({
-  list: protectedProcedure.query(() => {
-    // TODO: Implement organization listing logic
-    return {
-      organizations: [],
-    };
+  list: protectedProcedure.query(async ({ ctx }) => {
+    const userMemberships = await ctx.db
+      .select({
+        id: organization.id,
+        name: organization.name,
+        slug: organization.slug,
+        logo: organization.logo,
+        role: member.role,
+      })
+      .from(organization)
+      .innerJoin(member, eq(member.organizationId, organization.id))
+      .where(eq(member.userId, ctx.user.id));
+
+    return userMemberships;
   }),
+
+  setActive: protectedProcedure
+    .input(z.object({ organizationId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      // Verify user is a member of the organization
+      const membership = await ctx.db
+        .select()
+        .from(member)
+        .where(
+          and(
+            eq(member.userId, ctx.user.id),
+            eq(member.organizationId, input.organizationId),
+          ),
+        )
+        .limit(1);
+
+      if (!membership.length) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not a member of this organization",
+        });
+      }
+
+      // Update the activeOrganizationId in the session
+      await ctx.db
+        .update(session)
+        .set({ activeOrganizationId: input.organizationId })
+        .where(eq(session.id, ctx.session.id));
+
+      return { success: true };
+    }),
 
   create: protectedProcedure
     .input(

@@ -10,11 +10,15 @@ import type { AppContext } from "./context.js";
 import { router } from "./trpc.js";
 import { organizationRouter } from "../routers/organization.js";
 import { userRouter } from "../routers/user.js";
+import { branchRouter } from "../routers/branch.js";
+import { dashboardRouter } from "../routers/dashboard.js";
 
 // tRPC API router
 const appRouter = router({
   user: userRouter,
   organization: organizationRouter,
+  branch: branchRouter,
+  dashboard: dashboardRouter,
 });
 
 // HTTP router
