@@ -26,10 +26,18 @@ app.all("/api/*", (c) => c.env.API_SERVICE.fetch(c.req.raw));
 app.all("/_app/*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/login*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/signup*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/accept-invite*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/settings*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/admin*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/analytics*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/reports*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/inventory*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/live-orders*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/menu-mapping*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/users*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/dashboard*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/integrations*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/sync-logs*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 
 // Home page: route based on auth-hint cookie presence
 // __Host-auth (HTTPS) or auth (HTTP dev) — see docs/adr/001-auth-hint-cookie.md
