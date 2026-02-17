@@ -13,6 +13,7 @@ import { userRouter } from "../routers/user.js";
 import { branchRouter } from "../routers/branch.js";
 import { dashboardRouter } from "../routers/dashboard.js";
 import { menuRouter } from "../routers/menu.js";
+import { orderRouter } from "../routers/order.js";
 
 // tRPC API router
 const appRouter = router({
@@ -21,6 +22,7 @@ const appRouter = router({
   branch: branchRouter,
   dashboard: dashboardRouter,
   menu: menuRouter,
+  order: orderRouter,
 });
 
 // HTTP router
