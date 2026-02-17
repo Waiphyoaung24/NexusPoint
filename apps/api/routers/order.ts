@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { eq, and, desc } from "drizzle-orm";
-import { order, member } from "@repo/db";
+import { order, member, branch } from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
 
@@ -66,11 +66,23 @@ export const orderRouter = router({
     .mutation(async ({ ctx, input }) => {
       const orgId = await getOrganizationId(ctx);
 
+      // Validate branchId — Flutter may send orgId as branchId if no branches exist.
+      // Set to null instead of letting a FK violation silently kill the insert.
+      let resolvedBranchId: string | undefined = undefined;
+      if (input.branchId) {
+        const exists = await ctx.db
+          .select({ id: branch.id })
+          .from(branch)
+          .where(eq(branch.id, input.branchId))
+          .limit(1);
+        resolvedBranchId = exists[0]?.id;
+      }
+
       const [newOrder] = await ctx.db
         .insert(order)
         .values({
           organizationId: orgId,
-          branchId: input.branchId,
+          branchId: resolvedBranchId,
           externalOrderId: input.externalOrderId,
           source: input.source,
           customerName: input.customerName,
@@ -109,8 +121,17 @@ export const orderRouter = router({
       const orgId = await getOrganizationId(ctx);
 
       const conditions = [eq(order.organizationId, orgId)];
+      // Only filter by branchId if it actually exists in the branch table —
+      // Flutter may send the org ID as branchId when no branches are configured.
       if (input?.branchId) {
-        conditions.push(eq(order.branchId, input.branchId));
+        const branchExists = await ctx.db
+          .select({ id: branch.id })
+          .from(branch)
+          .where(eq(branch.id, input.branchId))
+          .limit(1);
+        if (branchExists[0]) {
+          conditions.push(eq(order.branchId, input.branchId));
+        }
       }
       if (input?.status) {
         conditions.push(eq(order.status, input.status));
