@@ -51,6 +51,34 @@ worker.use(async (c, next) => {
   await next();
 });
 
+// Retry transient errors (cold-start DB connection failures, Hyperdrive init)
+worker.use(async (c, next) => {
+  try {
+    await next();
+  } catch (err) {
+    // Retry once on connection-related errors
+    const msg = err instanceof Error ? err.message : "";
+    const isTransient =
+      msg.includes("connection") ||
+      msg.includes("CONNECT_TIMEOUT") ||
+      msg.includes("fetch failed") ||
+      msg.includes("terminated");
+    if (isTransient) {
+      console.warn("[retry] Transient error, retrying once:", msg);
+      // Re-create DB connections for fresh attempt
+      const db = createDb(c.env.HYPERDRIVE_CACHED);
+      const dbDirect = createDb(c.env.HYPERDRIVE_DIRECT);
+      const auth = createAuth(db, c.env);
+      c.set("db", db);
+      c.set("dbDirect", dbDirect);
+      c.set("auth", auth);
+      await next();
+    } else {
+      throw err;
+    }
+  }
+});
+
 // Mount the core API app
 worker.route("/", app);
 
