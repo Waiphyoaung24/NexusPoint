@@ -1,4 +1,5 @@
 import { schema as Db } from "@repo/db";
+import { eq, sql } from "drizzle-orm";
 import { createAuthMiddleware } from "better-auth/api";
 import { betterAuth } from "better-auth";
 import type { DB } from "better-auth/adapters/drizzle";
@@ -166,6 +167,47 @@ export function createAuth(
         // Set hint cookie on session creation (sign-in, sign-up, OAuth callback)
         if (ctx.context.newSession) {
           ctx.setCookie(cookieName, AUTH_HINT_VALUE, cookieOpts);
+
+          // Auto-select organization based on user role priority
+          const sessionData = ctx.context.session;
+          if (
+            sessionData?.session &&
+            !(
+              "activeOrganizationId" in sessionData.session &&
+              sessionData.session.activeOrganizationId
+            )
+          ) {
+            const userId = sessionData.session.userId;
+            const sessionId = sessionData.session.id;
+
+            // Query user's organization memberships with role priority
+            // Role hierarchy: owner > admin > member
+            const memberships = await db
+              .select({
+                organizationId: Db.member.organizationId,
+                role: Db.member.role,
+              })
+              .from(Db.member)
+              .where(eq(Db.member.userId, userId))
+              .orderBy(
+                // PostgreSQL CASE for role priority
+                sql`CASE
+                  WHEN ${Db.member.role} = 'owner' THEN 1
+                  WHEN ${Db.member.role} = 'admin' THEN 2
+                  WHEN ${Db.member.role} = 'member' THEN 3
+                  ELSE 4
+                END`,
+              );
+
+            // Set active organization to highest priority membership
+            if (memberships.length > 0) {
+              await db
+                .update(Db.session)
+                .set({ activeOrganizationId: memberships[0].organizationId })
+                .where(eq(Db.session.id, sessionId));
+            }
+          }
+
           return;
         }
 

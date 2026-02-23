@@ -11,6 +11,7 @@
   "scripts": {
     "predev": "bun --filter @repo/email build",
     "dev": "bun run --watch --env-file ../../.env --env-file ../../.env.local ./dev.ts",
+    "dev:prod": "bun run --watch --env-file ../../.env --env-file ../../.env.prod.local ./dev.ts",
     "build": "bun build index.ts --outdir dist --target bun",
     "test": "vitest",
     "typecheck": "tsc --noEmit",

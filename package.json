@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "dev": "bun --filter @repo/web --filter @repo/api --filter @repo/app dev",
+    "check-env": "bun scripts/check-env.ts",
     "lint": "eslint --cache --report-unused-disable-directives .",
     "test": "vitest",
     "typecheck": "tsr generate && tsc --build",

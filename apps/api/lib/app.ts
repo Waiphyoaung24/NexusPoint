@@ -12,6 +12,7 @@ import { organizationRouter } from "../routers/organization.js";
 import { userRouter } from "../routers/user.js";
 import { branchRouter } from "../routers/branch.js";
 import { dashboardRouter } from "../routers/dashboard.js";
+import { menuRouter } from "../routers/menu.js";
 
 // tRPC API router
 const appRouter = router({
@@ -19,6 +20,7 @@ const appRouter = router({
   organization: organizationRouter,
   branch: branchRouter,
   dashboard: dashboardRouter,
+  menu: menuRouter,
 });
 
 // HTTP router

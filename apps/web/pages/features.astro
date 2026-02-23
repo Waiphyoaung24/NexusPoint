@@ -1,140 +1,96 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button } from '@repo/ui';
 
-const title = "Features - {import.meta.env.APP_NAME || 'NexusPoint'}";
-const description = "Explore all the powerful features that make {import.meta.env.APP_NAME || 'NexusPoint'} the perfect foundation for your next project.";
+const title = `Features - ${import.meta.env.APP_NAME || 'NexusPoint'}`;
+const description = `Discover the powerful point-of-sale features of ${import.meta.env.APP_NAME || 'NexusPoint'} - designed for modern retail and hospitality.`;
 
 const featureCategories = [
   {
-    title: "Developer Experience",
-    icon: "🛠️",
+    title: "Sales & Checkout",
+    icon: "💳",
     features: [
       {
-        title: "TypeScript First",
-        description: "Full TypeScript support with strict type checking and IntelliSense"
+        title: "Lightning Fast Checkout",
+        description: "Complete transactions in seconds with our optimized UI."
       },
       {
-        title: "Hot Module Replacement",
-        description: "Instant feedback with fast refresh and state preservation"
+        title: "Split Payments",
+        description: "Easily split bills between multiple customers and payment methods."
       },
       {
-        title: "Monorepo Structure",
-        description: "Organized workspace management with Bun workspaces"
+        title: "Digital Receipts",
+        description: "Send receipts via email or SMS. Save paper and stay connected."
       },
       {
-        title: "Code Generation",
-        description: "Automated route generation and type inference"
+        title: "Offline Mode",
+        description: "Keep selling even when your internet goes down. Syncs later."
       }
     ]
   },
   {
-    title: "Performance",
-    icon: "⚡",
+    title: "Inventory Management",
+    icon: "📦",
     features: [
       {
-        title: "Edge Rendering",
-        description: "Server-side rendering at CDN edge locations worldwide"
+        title: "Real-time Tracking",
+        description: "Inventory levels update instantly across all your stores."
       },
       {
-        title: "Code Splitting",
-        description: "Automatic route-based code splitting for optimal loading"
+        title: "Low Stock Alerts",
+        description: "Get notified before you run out of your best-selling items."
       },
       {
-        title: "Asset Optimization",
-        description: "Image optimization, lazy loading, and efficient bundling"
+        title: "Automated POs",
+        description: "Generate purchase orders automatically based on stock levels."
       },
       {
-        title: "Zero-Config CDN",
-        description: "Built-in CDN support with Cloudflare Workers"
+        title: "Multi-location Sync",
+        description: "Manage stock across multiple warehouses and storefronts."
       }
     ]
   },
   {
-    title: "Full-Stack Capabilities",
-    icon: "🚀",
+    title: "Staff & Operations",
+    icon: "👥",
     features: [
       {
-        title: "Type-Safe APIs",
-        description: "End-to-end type safety with tRPC"
+        title: "Smart Scheduling",
+        description: "Build schedules based on predicted sales and staff availability."
       },
       {
-        title: "Authentication",
-        description: "Built-in auth with Better Auth and session management"
+        title: "Role-based Permissions",
+        description: "Control access to sensitive data and critical functions."
       },
       {
-        title: "Database Integration",
-        description: "PostgreSQL with Drizzle ORM and migrations"
+        title: "Performance Metrics",
+        description: "Track sales per staff member to reward top performers."
       },
       {
-        title: "Real-time Support",
-        description: "WebSocket integration for live features"
+        title: "Time Clock",
+        description: "Integrated clock-in/out with photo verification."
       }
     ]
   },
   {
-    title: "UI & Design",
-    icon: "🎨",
+    title: "Analytics & Insights",
+    icon: "📊",
     features: [
       {
-        title: "Component Library",
-        description: "Pre-built components with ShadCN UI"
+        title: "Visual Dashboards",
+        description: "See your business health at a glance with beautiful charts."
       },
       {
-        title: "Tailwind CSS v4",
-        description: "Latest Tailwind with automatic class sorting"
+        title: "Custom Reports",
+        description: "Build the reports you need with our drag-and-drop builder."
       },
       {
-        title: "Dark Mode",
-        description: "Built-in theme support with system preference detection"
+        title: "Customer Insights",
+        description: "Understand buying patterns and customer loyalty."
       },
       {
-        title: "Responsive Design",
-        description: "Mobile-first approach with adaptive layouts"
-      }
-    ]
-  },
-  {
-    title: "Testing & Quality",
-    icon: "✅",
-    features: [
-      {
-        title: "Unit Testing",
-        description: "Vitest setup with coverage reporting"
-      },
-      {
-        title: "E2E Testing",
-        description: "Playwright integration for browser testing"
-      },
-      {
-        title: "Type Checking",
-        description: "Strict TypeScript configuration"
-      },
-      {
-        title: "Linting & Formatting",
-        description: "ESLint and Prettier pre-configured"
-      }
-    ]
-  },
-  {
-    title: "Deployment & DevOps",
-    icon: "☁️",
-    features: [
-      {
-        title: "CI/CD Pipeline",
-        description: "GitHub Actions workflow included"
-      },
-      {
-        title: "Infrastructure as Code",
-        description: "Terraform configuration for Cloudflare"
-      },
-      {
-        title: "Environment Management",
-        description: "Multi-environment support with .env files"
-      },
-      {
-        title: "Monitoring",
-        description: "Built-in error tracking and analytics"
+        title: "Financial Sync",
+        description: "Export data directly to QuickBooks or Xero."
       }
     ]
   }
@@ -144,30 +100,33 @@ const featureCategories = [
 <BaseLayout title={title} description={description}>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <!-- Hero Section -->
-    <div class="text-center mb-16">
-      <h1 class="text-4xl font-bold tracking-tight mb-6">
-        Powerful Features for Modern Development
+    <div class="text-center mb-24">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+        <span class="text-xs font-bold text-primary uppercase tracking-wider">Comprehensive Tools</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6">
+        Everything you need to<br/>
+        <span class="text-primary">grow your business.</span>
       </h1>
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        Everything you need to build, test, and deploy production-ready web applications
-        with confidence and speed.
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        {import.meta.env.APP_NAME || 'NexusPoint'} provides a complete suite of tools designed to help you run your business more efficiently and profitably.
       </p>
     </div>
 
     <!-- Feature Categories -->
     {featureCategories.map((category) => (
-      <section class="mb-20">
-        <div class="flex items-center mb-8">
-          <span class="text-4xl mr-4">{category.icon}</span>
-          <h2 class="text-3xl font-bold tracking-tight">{category.title}</h2>
+      <section class="mb-24">
+        <div class="flex items-center gap-4 mb-12 border-b pb-6">
+          <span class="text-4xl p-3 bg-muted rounded-2xl">{category.icon}</span>
+          <h2 class="text-3xl font-black tracking-tight">{category.title}</h2>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           {category.features.map((feature) => (
-            <Card client:visible>
+            <Card className="border-2 shadow-sm hover:shadow-md transition-all group" client:visible>
               <CardHeader>
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{feature.title}</CardTitle>
+                <CardDescription className="text-base font-medium leading-relaxed">{feature.description}</CardDescription>
               </CardHeader>
             </Card>
           ))}
@@ -175,104 +134,53 @@ const featureCategories = [
       </section>
     ))}
 
-    <!-- Tech Stack Detail -->
-    <section class="mb-20 bg-muted/20 rounded-lg p-12">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        Built with Best-in-Class Technologies
+    <!-- Tech Stack Detail - Refocused for Business -->
+    <section class="mb-24 bg-primary p-12 md:p-20 rounded-[3rem] text-primary-foreground relative overflow-hidden">
+       <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+       <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+       
+      <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-8 text-center relative z-10">
+        Scalable & Secure
       </h2>
+      <p class="text-xl text-primary-foreground/80 max-w-3xl mx-auto text-center mb-16 relative z-10 leading-relaxed font-medium">
+        We use world-class infrastructure to ensure your business data is always safe, accessible, and fast, no matter where you are or how many stores you have.
+      </p>
       
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
         {[
-          { name: "React 19", category: "UI Framework" },
-          { name: "TypeScript 5.9", category: "Language" },
-          { name: "Astro", category: "Static Site Gen" },
-          { name: "Bun", category: "Runtime" },
-          { name: "Vite", category: "Build Tool" },
-          { name: "TanStack Router", category: "Routing" },
-          { name: "tRPC", category: "API Layer" },
-          { name: "Hono", category: "Web Framework" },
-          { name: "ShadCN UI", category: "Components" },
-          { name: "Tailwind CSS", category: "Styling" },
-          { name: "Drizzle ORM", category: "Database" },
-          { name: "PostgreSQL", category: "Database" },
-          { name: "Better Auth", category: "Authentication" },
-          { name: "Cloudflare", category: "Platform" },
-          { name: "Vitest", category: "Testing" },
-          { name: "Terraform", category: "Infrastructure" }
+          { name: "Bank-Level Security", category: "Data Protection" },
+          { name: "99.9% Uptime", category: "Reliability" },
+          { name: "Real-time Sync", category: "Performance" },
+          { name: "Daily Backups", category: "Safety" },
+          { name: "End-to-End Encryption", category: "Privacy" },
+          { name: "Global Edge Network", category: "Speed" },
+          { name: "GDPR Compliant", category: "Regulation" },
+          { name: "24/7 Monitoring", category: "Assurance" }
         ].map((tech) => (
-          <div class="bg-background rounded-lg p-4 border">
-            <div class="font-semibold">{tech.name}</div>
-            <div class="text-xs text-muted-foreground">{tech.category}</div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-colors">
+            <div class="font-bold text-lg">{tech.name}</div>
+            <div class="text-xs text-primary-foreground/60 uppercase tracking-widest font-black mt-1">{tech.category}</div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Code Example -->
-    <section class="mb-20">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        Clean, Modern Code
-      </h2>
-      
-      <Card client:visible>
-        <CardHeader>
-          <CardTitle>Example: Type-Safe API Route</CardTitle>
-          <CardDescription>
-            Define your API with full type safety from backend to frontend
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
-            <code class="text-sm">{`// api/router.ts
-export const appRouter = router({
-  user: {
-    get: publicProcedure
-      .input(z.object({ id: z.string() }))
-      .query(async ({ input }) => {
-        return await db.user.findUnique({
-          where: { id: input.id }
-        });
-      }),
-  },
-});
-
-// app/page.tsx
-function UserProfile({ userId }: Props) {
-  const { data } = trpc.user.get.useQuery({ id: userId });
-  
-  return <div>{data?.name}</div>;
-}`}</code>
-          </pre>
-        </CardContent>
-      </Card>
-    </section>
-
     <!-- CTA Section -->
-    <section class="text-center">
-      <h2 class="text-3xl font-bold tracking-tight mb-4">
-        Experience the Difference
+    <section class="text-center py-12">
+      <h2 class="text-4xl font-black tracking-tight mb-6">
+        Ready to see it in action?
       </h2>
-      <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-        See why developers choose {import.meta.env.APP_NAME || 'NexusPoint'} for their most important projects.
+      <p class="text-muted-foreground text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+        Join the businesses that have increased their efficiency by over 30% with {import.meta.env.APP_NAME || 'NexusPoint'}.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="https://github.com/kriasoft/react-starter-kit"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-4 py-2"
-        >
-          Try It Now
-        </a>
-        <a 
-          href="https://github.com/kriasoft/react-starter-kit#readme"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-        >
-          View Documentation
-        </a>
+        <Button size="lg" className="h-14 px-10 text-lg font-bold rounded-full" client:visible>
+          Start Free Trial
+        </Button>
+        <Button variant="outline" size="lg" className="h-14 px-10 text-lg font-bold rounded-full" client:visible>
+          Book a Demo
+        </Button>
       </div>
     </section>
   </div>

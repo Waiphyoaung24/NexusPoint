@@ -2,257 +2,164 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Separator } from '@repo/ui';
 
-const title = "About - {import.meta.env.APP_NAME || 'NexusPoint'}";
-const description = "Learn about {import.meta.env.APP_NAME || 'NexusPoint'}, a production-ready full-stack web application template built with modern technologies.";
+const title = `About - ${import.meta.env.APP_NAME || 'NexusPoint'}`;
+const description = `Learn about ${import.meta.env.APP_NAME || 'NexusPoint'}, the modern point-of-sale system designed for the next generation of retail and hospitality.`;
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <!-- Hero Section -->
-    <div class="text-center mb-16">
-      <h1 class="text-4xl font-bold tracking-tight mb-6">
-        About {import.meta.env.APP_NAME || 'NexusPoint'}
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+        <span class="text-xs font-bold text-primary uppercase tracking-wider">Our Story</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6">
+        Modernizing the way<br/>
+        <span class="text-primary">businesses sell.</span>
       </h1>
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        A production-ready, full-stack web application template that combines
-        modern development practices with cutting-edge technologies to deliver
-        exceptional performance and developer experience.
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        {import.meta.env.APP_NAME || 'NexusPoint'} was born from a simple observation: most POS systems are too complex, too expensive, and too slow. We're here to change that.
       </p>
     </div>
 
     <!-- Mission Section -->
-    <section class="mb-20">
-      <Card client:visible>
-        <CardHeader>
-          <CardTitle className="text-2xl">Our Mission</CardTitle>
-          <CardDescription>
-            Empowering developers to build faster, better web applications
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p class="text-muted-foreground">
-            {import.meta.env.APP_NAME || 'NexusPoint'} was created to bridge the gap between prototype
-            and production. We believe that developers should focus on
-            building great features, not wrestling with configuration and
-            setup.
-          </p>
-          <p class="text-muted-foreground">
-            Our template provides a solid foundation with best practices,
-            modern tooling, and optimized performance out of the box, so you
-            can ship your ideas faster and with confidence.
-          </p>
-        </CardContent>
+    <section class="mb-24">
+      <Card className="border-2 shadow-xl overflow-hidden rounded-2xl" client:visible>
+        <div class="grid md:grid-cols-2 gap-0">
+          <div class="bg-primary p-12 text-primary-foreground flex flex-col justify-center">
+             <h2 class="text-3xl font-bold mb-6 italic">"Simplicity is the ultimate sophistication."</h2>
+             <p class="text-primary-foreground/80 font-medium">
+               We believe that business owners should spend their time serving customers, not troubleshooting software. Our mission is to provide the most intuitive, reliable, and powerful tools for retail and hospitality.
+             </p>
+          </div>
+          <CardContent className="p-12 flex flex-col justify-center space-y-6">
+            <CardTitle className="text-3xl font-black">Our Mission</CardTitle>
+            <p class="text-muted-foreground leading-relaxed">
+              {import.meta.env.APP_NAME || 'NexusPoint'} provides a solid foundation for your business growth. We use the latest web technologies to ensure your POS is always fast, always secure, and always available.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              Whether you're running a single boutique or a nationwide franchise, our tools scale with you, providing the insights you need to make better decisions.
+            </p>
+          </CardContent>
+        </div>
       </Card>
     </section>
 
-    <!-- Key Features -->
-    <section class="mb-20">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        What Makes Us Different
+    <!-- Values -->
+    <section class="mb-24">
+      <h2 class="text-3xl font-black tracking-tight mb-12 text-center">
+        Our Core Values
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card client:visible>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card className="border-2 hover:border-primary/50 transition-colors" client:visible>
           <CardHeader>
-            <CardTitle>🎯 Production-Ready</CardTitle>
-            <CardDescription>
-              Not just a demo, but a real foundation for your applications
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <CardTitle className="font-bold">Speed</CardTitle>
+            <CardDescription className="font-medium text-muted-foreground">
+              Every millisecond counts during checkout.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Every component, pattern, and configuration has been
-              battle-tested in production environments. Security, performance,
-              and maintainability are built-in from day one.
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              We optimize every interaction to ensure your staff can serve customers without delay. A faster checkout means happier customers and more sales.
             </p>
           </CardContent>
         </Card>
 
-        <Card client:visible>
+        <Card className="border-2 hover:border-primary/50 transition-colors" client:visible>
           <CardHeader>
-            <CardTitle>⚡ Edge-First Architecture</CardTitle>
-            <CardDescription>
-              Optimized for global performance at CDN edge locations
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <CardTitle className="font-bold">Reliability</CardTitle>
+            <CardDescription className="font-medium text-muted-foreground">
+              Your business doesn't stop, neither do we.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Built specifically for Cloudflare Workers and edge computing.
-              Your applications run closer to your users for lightning-fast
-              response times.
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Our edge-first architecture ensures 99.9% uptime. Even if the internet goes down, our offline mode keeps you selling.
             </p>
           </CardContent>
         </Card>
 
-        <Card client:visible>
+        <Card className="border-2 hover:border-primary/50 transition-colors" client:visible>
           <CardHeader>
-            <CardTitle>🔧 Developer Experience</CardTitle>
-            <CardDescription>
-              Carefully crafted tooling for maximum productivity
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </div>
+            <CardTitle className="font-bold">Clarity</CardTitle>
+            <CardDescription className="font-medium text-muted-foreground">
+              Data turned into actionable insights.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p class="text-sm text-muted-foreground">
-              Hot reload, TypeScript support, comprehensive testing setup, and
-              intuitive project structure. Everything you need to stay in the
-              flow.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card client:visible>
-          <CardHeader>
-            <CardTitle>🌐 Full-Stack Solution</CardTitle>
-            <CardDescription>
-              Complete backend and frontend in one cohesive package
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-sm text-muted-foreground">
-              tRPC for type-safe APIs, Better Auth for authentication and
-              database, and WebSocket support for real-time features.
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              We don't just show you numbers; we show you what they mean. Know exactly what to stock and when to staff up.
             </p>
           </CardContent>
         </Card>
       </div>
     </section>
 
-    <!-- Technology Choices -->
-    <section class="mb-20">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        Technology Choices
-      </h2>
+    <!-- Technology -->
+    <section class="mb-24 bg-muted/30 p-12 rounded-3xl border">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-black tracking-tight mb-8">
+          Built with Modern Technology
+        </h2>
+        <p class="text-lg text-muted-foreground mb-12">
+          {import.meta.env.APP_NAME || 'NexusPoint'} is built using a world-class technology stack to provide the best possible performance and security for your business.
+        </p>
 
-      <Card client:visible>
-        <CardContent className="pt-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="font-semibold mb-4">Frontend Stack</h3>
-              <ul class="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <strong>React 19:</strong> Latest React with concurrent
-                  features
-                </li>
-                <li>
-                  <strong>TypeScript:</strong> Type safety and better
-                  developer experience
-                </li>
-                <li>
-                  <strong>Astro:</strong> Lightning-fast static site generation
-                </li>
-                <li>
-                  <strong>TanStack Router:</strong> Type-safe routing with
-                  code splitting
-                </li>
-                <li>
-                  <strong>ShadCN UI:</strong> Beautiful, accessible component
-                  library
-                </li>
-                <li>
-                  <strong>Tailwind CSS:</strong> Utility-first CSS framework
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 class="font-semibold mb-4">Backend Stack</h3>
-              <ul class="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <strong>Bun:</strong> Fast JavaScript runtime and package
-                  manager
-                </li>
-                <li>
-                  <strong>Hono:</strong> Ultra-fast web framework for edge
-                  computing
-                </li>
-                <li>
-                  <strong>tRPC:</strong> End-to-end type safety for APIs
-                </li>
-                <li>
-                  <strong>Better Auth:</strong> Authentication
-                </li>
-                <li>
-                  <strong>Cloudflare Workers:</strong> Serverless edge
-                  computing
-                </li>
-                <li>
-                  <strong>WebSockets:</strong> Real-time communication support
-                </li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </section>
-
-    <!-- Team Section -->
-    <section class="mb-20">
-      <h2 class="text-3xl font-bold tracking-tight mb-8 text-center">
-        Built by Kriasoft
-      </h2>
-
-      <Card client:visible>
-        <CardContent className="pt-6 text-center">
-          <p class="text-muted-foreground mb-6">
-            {import.meta.env.APP_NAME || 'NexusPoint'} is maintained by Kriasoft, a team of experienced
-            developers passionate about modern web technologies and developer
-            experience.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild client:visible>
-              <a
-                href="https://github.com/kriasoft"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit Kriasoft on GitHub
-              </a>
-            </Button>
-            <Button variant="outline" asChild client:visible>
-              <a
-                href="https://kriasoft.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn More About Kriasoft
-              </a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+           <div class="space-y-2">
+             <div class="text-primary font-black text-2xl">Astro</div>
+             <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">Frontend</div>
+           </div>
+           <div class="space-y-2">
+             <div class="text-primary font-black text-2xl">React</div>
+             <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">UI Library</div>
+           </div>
+           <div class="space-y-2">
+             <div class="text-primary font-black text-2xl">Hono</div>
+             <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">Edge API</div>
+           </div>
+           <div class="space-y-2">
+             <div class="text-primary font-black text-2xl">Tailwind</div>
+             <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">Styling</div>
+           </div>
+        </div>
+      </div>
     </section>
 
     <Separator className="my-12" client:visible />
 
     <!-- CTA Section -->
-    <section class="text-center">
-      <h2 class="text-3xl font-bold tracking-tight mb-4">
-        Ready to Get Started?
+    <section class="text-center py-12">
+      <h2 class="text-4xl font-black tracking-tight mb-6">
+        Ready to Join the Revolution?
       </h2>
-      <p class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-        Join thousands of developers who have chosen {import.meta.env.APP_NAME || 'NexusPoint'} for
-        their next project.
+      <p class="text-muted-foreground text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+        Experience the future of point-of-sale today. Start your 14-day free trial and see the difference.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button size="lg" asChild client:visible>
-          <a
-            href="https://github.com/kriasoft/react-starter-kit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get Started Now
-          </a>
+        <Button size="lg" className="h-14 px-10 text-lg font-bold rounded-full" client:visible>
+          Start Free Trial
         </Button>
-        <Button variant="outline" size="lg" asChild client:visible>
-          <a
-            href="https://github.com/kriasoft/react-starter-kit/discussions"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Join the Community
-          </a>
+        <Button variant="outline" size="lg" className="h-14 px-10 text-lg font-bold rounded-full" client:visible>
+          Contact Sales
         </Button>
       </div>
     </section>

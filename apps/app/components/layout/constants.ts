@@ -6,6 +6,7 @@ import {
   Book,
   FileText,
   Home,
+  Utensils,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -33,6 +34,7 @@ export const sidebarSections: NavSection[] = [
   {
     titleKey: "nav.management",
     items: [
+      { icon: Utensils, labelKey: "nav.menu", to: "/menu" },
       { icon: Book, labelKey: "nav.inventory", to: "/inventory" },
       { icon: FileText, labelKey: "nav.reports", to: "/reports" },
       { icon: Settings, labelKey: "nav.settings", to: "/settings" },

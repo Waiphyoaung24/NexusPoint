@@ -21,6 +21,7 @@ import { Route as appSyncLogsRouteImport } from './../routes/(app)/sync-logs'
 import { Route as appSettingsRouteImport } from './../routes/(app)/settings'
 import { Route as appReportsRouteImport } from './../routes/(app)/reports'
 import { Route as appMenuMappingRouteImport } from './../routes/(app)/menu-mapping'
+import { Route as appMenuRouteImport } from './../routes/(app)/menu'
 import { Route as appLiveOrdersRouteImport } from './../routes/(app)/live-orders'
 import { Route as appInventoryRouteImport } from './../routes/(app)/inventory'
 import { Route as appIntegrationsRouteImport } from './../routes/(app)/integrations'
@@ -91,6 +92,11 @@ const appMenuMappingRoute = appMenuMappingRouteImport.update({
   path: '/menu-mapping',
   getParentRoute: () => appRouteRoute,
 } as any)
+const appMenuRoute = appMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const appLiveOrdersRoute = appLiveOrdersRouteImport.update({
   id: '/live-orders',
   path: '/live-orders',
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/integrations': typeof appIntegrationsRoute
   '/inventory': typeof appInventoryRoute
   '/live-orders': typeof appLiveOrdersRoute
+  '/menu': typeof appMenuRoute
   '/menu-mapping': typeof appMenuMappingRoute
   '/reports': typeof appReportsRouteWithChildren
   '/settings': typeof appSettingsRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/integrations': typeof appIntegrationsRoute
   '/inventory': typeof appInventoryRoute
   '/live-orders': typeof appLiveOrdersRoute
+  '/menu': typeof appMenuRoute
   '/menu-mapping': typeof appMenuMappingRoute
   '/settings': typeof appSettingsRoute
   '/sync-logs': typeof appSyncLogsRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/(app)/integrations': typeof appIntegrationsRoute
   '/(app)/inventory': typeof appInventoryRoute
   '/(app)/live-orders': typeof appLiveOrdersRoute
+  '/(app)/menu': typeof appMenuRoute
   '/(app)/menu-mapping': typeof appMenuMappingRoute
   '/(app)/reports': typeof appReportsRouteWithChildren
   '/(app)/settings': typeof appSettingsRoute
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/inventory'
     | '/live-orders'
+    | '/menu'
     | '/menu-mapping'
     | '/reports'
     | '/settings'
@@ -247,6 +257,7 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/inventory'
     | '/live-orders'
+    | '/menu'
     | '/menu-mapping'
     | '/settings'
     | '/sync-logs'
@@ -270,6 +281,7 @@ export interface FileRouteTypes {
     | '/(app)/integrations'
     | '/(app)/inventory'
     | '/(app)/live-orders'
+    | '/(app)/menu'
     | '/(app)/menu-mapping'
     | '/(app)/reports'
     | '/(app)/settings'
@@ -379,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appMenuMappingRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/menu': {
+      id: '/(app)/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof appMenuRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/(app)/live-orders': {
       id: '/(app)/live-orders'
       path: '/live-orders'
@@ -477,6 +496,7 @@ interface appRouteRouteChildren {
   appIntegrationsRoute: typeof appIntegrationsRoute
   appInventoryRoute: typeof appInventoryRoute
   appLiveOrdersRoute: typeof appLiveOrdersRoute
+  appMenuRoute: typeof appMenuRoute
   appMenuMappingRoute: typeof appMenuMappingRoute
   appReportsRoute: typeof appReportsRouteWithChildren
   appSettingsRoute: typeof appSettingsRoute
@@ -493,6 +513,7 @@ const appRouteRouteChildren: appRouteRouteChildren = {
   appIntegrationsRoute: appIntegrationsRoute,
   appInventoryRoute: appInventoryRoute,
   appLiveOrdersRoute: appLiveOrdersRoute,
+  appMenuRoute: appMenuRoute,
   appMenuMappingRoute: appMenuMappingRoute,
   appReportsRoute: appReportsRouteWithChildren,
   appSettingsRoute: appSettingsRoute,
