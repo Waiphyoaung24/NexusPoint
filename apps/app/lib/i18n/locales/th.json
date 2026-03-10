@@ -10,7 +10,10 @@
     "integrations": "การเชื่อมต่อ",
     "syncLogs": "บันทึกการซิงค์",
     "bridgeIntegration": "{{appName}}",
-    "management": "การจัดการ"
+    "management": "การจัดการ",
+    "configuration": "การตั้งค่าร้าน",
+    "modifiers": "กลุ่มตัวเลือกเพิ่มเติม",
+    "menu": "เมนู"
   },
   "header": {
     "selectBranch": "เลือกสาขา",

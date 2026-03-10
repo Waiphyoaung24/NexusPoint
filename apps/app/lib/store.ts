@@ -18,6 +18,8 @@ export interface BranchContext {
 export const currentBranchAtom = atomWithStorage<BranchContext | null>(
   "currentBranch",
   null,
+  undefined,
+  { getOnInit: true },
 );
 
 export const branchListAtom = atom<BranchContext[]>([]);

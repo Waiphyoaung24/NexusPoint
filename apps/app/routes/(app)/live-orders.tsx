@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui";
 import { Grab } from "lucide-react";
 
@@ -17,44 +16,9 @@ type Order = {
   status: OrderStatus;
 };
 
-const initialOrders: Order[] = [
-  {
-    id: "88A1",
-    customer: "John Doe",
-    items: ["Chicken Rice", "Coke"],
-    status: "pending",
-  },
-  {
-    id: "88A2",
-    customer: "Jane Smith",
-    items: ["Pad Thai", "Iced Tea"],
-    status: "accepted",
-  },
-  {
-    id: "88A3",
-    customer: "Peter Jones",
-    items: ["Chicken Rice"],
-    status: "completed",
-  },
-];
-
 function LiveOrders() {
   const { t } = useTranslation();
-  const [orders, setOrders] = useState<Order[]>(initialOrders);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newOrder: Order = {
-        id: `88A${orders.length + 1}`,
-        customer: "New Customer",
-        items: ["Random Item"],
-        status: "pending",
-      };
-      setOrders((prev) => [newOrder, ...prev]);
-    }, 5000); // Add a new order every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [orders]);
+  const orders: Order[] = [];
 
   const columns: { status: OrderStatus; labelKey: string }[] = [
     { status: "pending", labelKey: "liveOrders.pending" },

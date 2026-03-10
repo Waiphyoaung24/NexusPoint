@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {
   Select,
   SelectContent,
@@ -18,6 +19,7 @@ export function OrganizationSwitcher() {
   const { data: session } = useSessionQuery();
   const setCurrentBranch = useSetAtom(currentBranchAtom);
   const activeOrgId = session?.session?.activeOrganizationId;
+  const autoSelectDoneRef = useRef(false);
 
   const { data: organizations, isLoading } = useQuery(
     api.organization.list.queryOptions(),
@@ -39,6 +41,15 @@ export function OrganizationSwitcher() {
       },
     }),
   );
+
+  // Auto-select first organization when none is active
+  useEffect(() => {
+    if (autoSelectDoneRef.current) return;
+    if (!activeOrgId && organizations?.length && !setActiveMutation.isPending) {
+      autoSelectDoneRef.current = true;
+      setActiveMutation.mutate({ organizationId: organizations[0].id });
+    }
+  }, [activeOrgId, organizations, setActiveMutation.isPending]);
 
   const handleOrgChange = (orgId: string) => {
     setActiveMutation.mutate({ organizationId: orgId });
