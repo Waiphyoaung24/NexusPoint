@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { eq, and, desc } from "drizzle-orm";
-import { order, member, branch } from "@repo/db";
+import { order, orderItem, orderItemModifier, member, branch } from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
 
@@ -38,12 +38,19 @@ async function getOrganizationId(
   return orgId;
 }
 
+const orderItemModifierSchema = z.object({
+  modifierOptionId: z.string().optional(),
+  name: z.string(),
+  priceAdjustment: z.string(),
+});
+
 const orderItemSchema = z.object({
   menuItemId: z.string(),
   name: z.string(),
   quantity: z.number().int().positive(),
   price: z.string(),
   notes: z.string().optional(),
+  modifiers: z.array(orderItemModifierSchema).optional(),
 });
 
 export const orderRouter = router({
@@ -78,22 +85,54 @@ export const orderRouter = router({
         resolvedBranchId = exists[0]?.id;
       }
 
-      const [newOrder] = await ctx.db
-        .insert(order)
-        .values({
-          organizationId: orgId,
-          branchId: resolvedBranchId,
-          externalOrderId: input.externalOrderId,
-          source: input.source,
-          customerName: input.customerName,
-          customerPhone: input.customerPhone,
-          items: input.items,
-          subtotal: input.subtotal,
-          discount: input.discount ?? "0",
-          total: input.total,
-          notes: input.notes,
-        })
-        .returning();
+      const newOrder = await ctx.dbDirect.transaction(async (tx) => {
+        const [inserted] = await tx
+          .insert(order)
+          .values({
+            organizationId: orgId,
+            branchId: resolvedBranchId,
+            externalOrderId: input.externalOrderId,
+            source: input.source,
+            customerName: input.customerName,
+            customerPhone: input.customerPhone,
+            items: input.items,
+            subtotal: input.subtotal,
+            discount: input.discount ?? "0",
+            total: input.total,
+            notes: input.notes,
+          })
+          .returning();
+
+        // Write normalized order_item rows (and order_item_modifier if present)
+        for (const item of input.items) {
+          const [insertedItem] = await tx
+            .insert(orderItem)
+            .values({
+              orderId: inserted.id,
+              organizationId: orgId,
+              menuItemId: item.menuItemId,
+              name: item.name,
+              quantity: item.quantity,
+              unitPrice: item.price,
+              subtotal: (parseFloat(item.price) * item.quantity).toFixed(2),
+              notes: item.notes,
+            })
+            .returning();
+
+          if (item.modifiers?.length) {
+            await tx.insert(orderItemModifier).values(
+              item.modifiers.map((mod) => ({
+                orderItemId: insertedItem.id,
+                modifierOptionId: mod.modifierOptionId,
+                name: mod.name,
+                priceAdjustment: mod.priceAdjustment,
+              })),
+            );
+          }
+        }
+
+        return inserted;
+      });
 
       return newOrder;
     }),

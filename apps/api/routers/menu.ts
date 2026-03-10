@@ -1,7 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { eq, and } from "drizzle-orm";
-import { menuItem, menuMapping, member } from "@repo/db";
+import { eq, and, asc, inArray } from "drizzle-orm";
+import {
+  menuItem,
+  menuMapping,
+  member,
+  modifierGroup,
+  modifierOption,
+  menuItemModifierGroup,
+} from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
 
@@ -189,6 +196,75 @@ export const menuRouter = router({
       }
 
       return deleted;
+    }),
+
+  /**
+   * Full menu sync payload for mobile — returns items, modifier groups with
+   * nested options, and the item↔group link table in one round-trip.
+   * The mobile app downloads this and caches it in Drift.
+   */
+  listWithModifiers: protectedProcedure
+    .input(z.object({ branchId: z.string().optional() }).optional())
+    .query(async ({ ctx, input }) => {
+      const orgId = await getOrganizationId(ctx);
+
+      // 1. Menu items
+      const itemConditions = [eq(menuItem.organizationId, orgId)];
+      if (input?.branchId) {
+        itemConditions.push(eq(menuItem.branchId, input.branchId));
+      }
+      const items = await ctx.db
+        .select()
+        .from(menuItem)
+        .where(and(...itemConditions))
+        .orderBy(asc(menuItem.sortOrder), asc(menuItem.name));
+
+      // 2. Active modifier groups for this org
+      const groups = await ctx.db
+        .select()
+        .from(modifierGroup)
+        .where(
+          and(
+            eq(modifierGroup.organizationId, orgId),
+            eq(modifierGroup.isActive, true),
+          ),
+        )
+        .orderBy(asc(modifierGroup.sortOrder), asc(modifierGroup.name));
+
+      // 3. Active options, nested under their groups
+      const options = groups.length
+        ? await ctx.db
+            .select()
+            .from(modifierOption)
+            .where(
+              and(
+                eq(modifierOption.organizationId, orgId),
+                eq(modifierOption.isActive, true),
+                inArray(
+                  modifierOption.modifierGroupId,
+                  groups.map((g) => g.id),
+                ),
+              ),
+            )
+            .orderBy(asc(modifierOption.sortOrder), asc(modifierOption.name))
+        : [];
+
+      const modifierGroups = groups.map((g) => ({
+        ...g,
+        options: options.filter((o) => o.modifierGroupId === g.id),
+      }));
+
+      // 4. Item↔modifier-group link rows (scoped to this org's items)
+      const itemIds = items.map((i) => i.id);
+      const itemModifierLinks = itemIds.length
+        ? await ctx.db
+            .select()
+            .from(menuItemModifierGroup)
+            .where(inArray(menuItemModifierGroup.menuItemId, itemIds))
+            .orderBy(asc(menuItemModifierGroup.sortOrder))
+        : [];
+
+      return { items, modifierGroups, itemModifierLinks };
     }),
 
   // List all mappings for the current organization
