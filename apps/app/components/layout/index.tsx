@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
+import { useBranchAutoSelect } from "@/lib/hooks/use-branch-auto-select";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,9 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  // Centralized branch auto-selection — runs once at layout level
+  useBranchAutoSelect();
 
   return (
     <div className="h-screen flex bg-background">
