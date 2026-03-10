@@ -36,6 +36,8 @@ export function useBranchAutoSelect() {
 
     if (needsAutoSelect) {
       const first = branches[0];
+      // Guard: skip if already pointing to this branch (prevents infinite re-render loop)
+      if (currentBranch?.id === first.id) return;
       setCurrentBranch({
         id: first.id,
         name: first.name,
