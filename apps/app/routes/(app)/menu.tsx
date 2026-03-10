@@ -7,6 +7,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  Checkbox,
   Input,
   Table,
   TableBody,
@@ -21,6 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Label,
+  Separator,
   Switch,
   Textarea,
 } from "@repo/ui";
@@ -31,6 +33,7 @@ import {
   Trash2,
   PackageOpen,
   Loader2,
+  SlidersHorizontal,
 } from "lucide-react";
 import { api } from "../../lib/trpc";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -77,6 +80,30 @@ function Menu() {
       onSuccess: () => {
         queryClient.invalidateQueries(api.menu.listItems.queryOptions({}));
       },
+    }),
+  );
+
+  // Modifier queries
+  const { data: allModifierGroups } = useQuery(
+    api.modifier.list.queryOptions({}),
+  );
+
+  const { data: itemModifierGroups, refetch: refetchItemModifiers } = useQuery({
+    ...api.modifier.listForItem.queryOptions({
+      menuItemId: editingItem?.id ?? "",
+    }),
+    enabled: !!editingItem?.id,
+  });
+
+  const assignModifier = useMutation(
+    api.modifier.assignToItem.mutationOptions({
+      onSuccess: () => refetchItemModifiers(),
+    }),
+  );
+
+  const unassignModifier = useMutation(
+    api.modifier.unassignFromItem.mutationOptions({
+      onSuccess: () => refetchItemModifiers(),
     }),
   );
 
@@ -258,6 +285,79 @@ function Menu() {
                 />
                 <Label htmlFor="isAvailable">Available</Label>
               </div>
+
+              {/* Modifier Groups (edit mode only) */}
+              {editingItem && (
+                <>
+                  <Separator />
+                  <div className="grid gap-3">
+                    <div className="flex items-center gap-2">
+                      <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
+                      <Label className="text-sm font-semibold">
+                        Modifier Groups
+                      </Label>
+                    </div>
+                    {!allModifierGroups?.length ? (
+                      <p className="text-xs text-muted-foreground">
+                        No modifier groups yet — create them in{" "}
+                        <span className="font-medium">
+                          Configuration → Modifier Groups
+                        </span>
+                        .
+                      </p>
+                    ) : (
+                      <div className="grid gap-2 max-h-44 overflow-y-auto pr-1">
+                        {allModifierGroups.map((group) => {
+                          const isAssigned = itemModifierGroups?.some(
+                            (ig) => ig.id === group.id,
+                          );
+                          return (
+                            <div
+                              key={group.id}
+                              className="flex items-center gap-3"
+                            >
+                              <Checkbox
+                                id={`mg-${group.id}`}
+                                checked={isAssigned ?? false}
+                                onCheckedChange={(checked) => {
+                                  if (!editingItem) return;
+                                  if (checked) {
+                                    assignModifier.mutate({
+                                      menuItemId: editingItem.id,
+                                      modifierGroupId: group.id,
+                                      sortOrder: 0,
+                                    });
+                                  } else {
+                                    unassignModifier.mutate({
+                                      menuItemId: editingItem.id,
+                                      modifierGroupId: group.id,
+                                    });
+                                  }
+                                }}
+                              />
+                              <Label
+                                htmlFor={`mg-${group.id}`}
+                                className="text-sm font-normal cursor-pointer flex items-center gap-2"
+                              >
+                                {group.name}
+                                {group.isRequired && (
+                                  <span className="text-xs text-orange-600 font-medium">
+                                    Required
+                                  </span>
+                                )}
+                                <span className="text-xs text-muted-foreground">
+                                  ({group.options.length} options)
+                                </span>
+                              </Label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
               <Button
                 onClick={handleSubmit}
                 disabled={createMutation.isPending || updateMutation.isPending}

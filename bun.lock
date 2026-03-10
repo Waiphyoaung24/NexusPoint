@@ -5,6 +5,8 @@
     "": {
       "name": "@repo/root",
       "dependencies": {
+        "@dnd-kit/core": "^5",
+        "@dnd-kit/utilities": "^3.2.0",
         "@types/recharts": "^2.0.1",
         "app": "^0.1.0",
         "recharts": "^3.7.0",
@@ -424,6 +426,12 @@
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
     "@devexpress/error-stack-parser": ["@devexpress/error-stack-parser@2.0.6", "", { "dependencies": { "stackframe": "^1.1.1" } }, "sha512-fneVypElGUH6Be39mlRZeAu00pccTlf4oVuzf9xPJD1cdEqI8NyAiQua/EW7lZdrbMUbgyXcJmfKPefhYius3A=="],
+
+    "@dnd-kit/accessibility": ["@dnd-kit/accessibility@3.1.1", "", { "dependencies": { "tslib": "^2.0.0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw=="],
+
+    "@dnd-kit/core": ["@dnd-kit/core@5.0.3", "", { "dependencies": { "@dnd-kit/accessibility": "^3.0.0", "@dnd-kit/utilities": "^3.1.0", "tslib": "^2.0.0" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-IribcBLsaPqHdYLpc5xG0TqwYIaD+65offdEYxoKh38WDjzRxUjDmrt7hj9oa/ooUKL0epux20u+mBTd92i/zw=="],
+
+    "@dnd-kit/utilities": ["@dnd-kit/utilities@3.2.2", "", { "dependencies": { "tslib": "^2.0.0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg=="],
 
     "@docsearch/core": ["@docsearch/core@4.4.0", "", { "peerDependencies": { "@types/react": ">= 16.8.0 < 20.0.0", "react": ">= 16.8.0 < 20.0.0", "react-dom": ">= 16.8.0 < 20.0.0" }, "optionalPeers": ["@types/react", "react", "react-dom"] }, "sha512-kiwNo5KEndOnrf5Kq/e5+D9NBMCFgNsDoRpKQJ9o/xnSlheh6b8AXppMuuUVVdAUIhIfQFk/07VLjjk/fYyKmw=="],
 
@@ -2381,7 +2389,7 @@
 
     "jws": ["jws@4.0.1", "", { "dependencies": { "jwa": "^2.0.1", "safe-buffer": "^5.0.1" } }, "sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA=="],
 
-    "kareem": ["kareem@3.0.0", "", {}, "sha512-RKhaOBSPN8L7y4yAgNhDT2602G5FD6QbOIISbjN9D6mjHPeqeg7K+EB5IGSU5o81/X2Gzm3ICnAvQW3x3OP8HA=="],
+    "kareem": ["kareem@3.2.0", "", {}, "sha512-VS8MWZz/cT+SqBCpVfNN4zoVz5VskR3N4+sTmUXme55e9avQHntpwpNq0yjnosISXqwJ3AQVjlbI4Dyzv//JtA=="],
 
     "katex": ["katex@0.16.27", "", { "dependencies": { "commander": "^8.3.0" }, "bin": { "katex": "cli.js" } }, "sha512-aeQoDkuRWSqQN6nSvVCEFvfXdqo1OQiCmmW1kc9xSdjutPv7BGO7pqY9sQRJpMOGrEdfDgF2TfRXe5eUAD2Waw=="],
 
@@ -2625,7 +2633,7 @@
 
     "mongodb-connection-string-url": ["mongodb-connection-string-url@7.0.1", "", { "dependencies": { "@types/whatwg-url": "^13.0.0", "whatwg-url": "^14.1.0" } }, "sha512-h0AZ9A7IDVwwHyMxmdMXKy+9oNlF0zFoahHiX3vQ8e3KFcSP3VmsmfvtRSuLPxmyv2vjIDxqty8smTgie/SNRQ=="],
 
-    "mongoose": ["mongoose@9.1.5", "", { "dependencies": { "kareem": "3.0.0", "mongodb": "~7.0", "mpath": "0.9.0", "mquery": "6.0.0", "ms": "2.1.3", "sift": "17.1.3" } }, "sha512-N6gypEO+wLmZp8kCYNQmrEWxVMT0KhyHvVttBZoKA/1ngY7aUsBjqHzCPtDgz+i8JAnqMOiEKmuJIDEQu1b9Dw=="],
+    "mongoose": ["mongoose@9.2.4", "", { "dependencies": { "kareem": "3.2.0", "mongodb": "~7.0", "mpath": "0.9.0", "mquery": "6.0.0", "ms": "2.1.3", "sift": "17.1.3" } }, "sha512-XNh+jiztVMddDFDCv8TWxVxi/rGx+0FfsK3Ftj6hcYzEmhTcos2uC144OJRmUFPHSu3hJr6Pgip++Ab2+Da35Q=="],
 
     "mpath": ["mpath@0.9.0", "", {}, "sha512-ikJRQTk8hw5DEoFVxHG1Gn9T/xcjtdnOKIU1JTmGjZZlg9LST2mBLmcX3/ICIbgJydT2GOc15RnNy5mHmzfSew=="],
 

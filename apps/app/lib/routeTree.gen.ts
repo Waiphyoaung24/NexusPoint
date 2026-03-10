@@ -9,7 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './../routes/__root'
-import { Route as AdminRouteImport } from './../routes/admin'
+import { Route as SuperAdminRouteImport } from './../routes/super-admin'
 import { Route as AcceptInviteRouteImport } from './../routes/accept-invite'
 import { Route as appRouteRouteImport } from './../routes/(app)/route'
 import { Route as appIndexRouteImport } from './../routes/(app)/index'
@@ -28,14 +28,17 @@ import { Route as appIntegrationsRouteImport } from './../routes/(app)/integrati
 import { Route as appDashboardRouteImport } from './../routes/(app)/dashboard'
 import { Route as appAnalyticsRouteImport } from './../routes/(app)/analytics'
 import { Route as appAboutRouteImport } from './../routes/(app)/about'
+import { Route as appAdminRouteRouteImport } from './../routes/(app)/admin/route'
 import { Route as appReportsIndexRouteImport } from './../routes/(app)/reports/index'
 import { Route as appReportsStockLevelsRouteImport } from './../routes/(app)/reports/stock-levels'
 import { Route as appReportsSalesSummaryRouteImport } from './../routes/(app)/reports/sales-summary'
 import { Route as appReportsMonthlyRevenueRouteImport } from './../routes/(app)/reports/monthly-revenue'
+import { Route as appAdminModifiersRouteImport } from './../routes/(app)/admin/modifiers'
+import { Route as appAdminFloorPlanRouteImport } from './../routes/(app)/admin/floor-plan'
 
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const SuperAdminRoute = SuperAdminRouteImport.update({
+  id: '/super-admin',
+  path: '/super-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcceptInviteRoute = AcceptInviteRouteImport.update({
@@ -127,6 +130,11 @@ const appAboutRoute = appAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => appRouteRoute,
 } as any)
+const appAdminRouteRoute = appAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const appReportsIndexRoute = appReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -148,10 +156,21 @@ const appReportsMonthlyRevenueRoute =
     path: '/monthly-revenue',
     getParentRoute: () => appReportsRoute,
   } as any)
+const appAdminModifiersRoute = appAdminModifiersRouteImport.update({
+  id: '/modifiers',
+  path: '/modifiers',
+  getParentRoute: () => appAdminRouteRoute,
+} as any)
+const appAdminFloorPlanRoute = appAdminFloorPlanRouteImport.update({
+  id: '/floor-plan',
+  path: '/floor-plan',
+  getParentRoute: () => appAdminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/accept-invite': typeof AcceptInviteRoute
-  '/admin': typeof AdminRoute
+  '/super-admin': typeof SuperAdminRoute
+  '/admin': typeof appAdminRouteRouteWithChildren
   '/about': typeof appAboutRoute
   '/analytics': typeof appAnalyticsRoute
   '/dashboard': typeof appDashboardRoute
@@ -168,6 +187,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
   '/': typeof appIndexRoute
+  '/admin/floor-plan': typeof appAdminFloorPlanRoute
+  '/admin/modifiers': typeof appAdminModifiersRoute
   '/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -175,7 +196,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/accept-invite': typeof AcceptInviteRoute
-  '/admin': typeof AdminRoute
+  '/super-admin': typeof SuperAdminRoute
+  '/admin': typeof appAdminRouteRouteWithChildren
   '/about': typeof appAboutRoute
   '/analytics': typeof appAnalyticsRoute
   '/dashboard': typeof appDashboardRoute
@@ -191,6 +213,8 @@ export interface FileRoutesByTo {
   '/login': typeof authLoginRoute
   '/signup': typeof authSignupRoute
   '/': typeof appIndexRoute
+  '/admin/floor-plan': typeof appAdminFloorPlanRoute
+  '/admin/modifiers': typeof appAdminModifiersRoute
   '/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -200,7 +224,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
   '/accept-invite': typeof AcceptInviteRoute
-  '/admin': typeof AdminRoute
+  '/super-admin': typeof SuperAdminRoute
+  '/(app)/admin': typeof appAdminRouteRouteWithChildren
   '/(app)/about': typeof appAboutRoute
   '/(app)/analytics': typeof appAnalyticsRoute
   '/(app)/dashboard': typeof appDashboardRoute
@@ -217,6 +242,8 @@ export interface FileRoutesById {
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/signup': typeof authSignupRoute
   '/(app)/': typeof appIndexRoute
+  '/(app)/admin/floor-plan': typeof appAdminFloorPlanRoute
+  '/(app)/admin/modifiers': typeof appAdminModifiersRoute
   '/(app)/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/(app)/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/(app)/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -226,6 +253,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/accept-invite'
+    | '/super-admin'
     | '/admin'
     | '/about'
     | '/analytics'
@@ -243,6 +271,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/'
+    | '/admin/floor-plan'
+    | '/admin/modifiers'
     | '/reports/monthly-revenue'
     | '/reports/sales-summary'
     | '/reports/stock-levels'
@@ -250,6 +280,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/accept-invite'
+    | '/super-admin'
     | '/admin'
     | '/about'
     | '/analytics'
@@ -266,6 +297,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/'
+    | '/admin/floor-plan'
+    | '/admin/modifiers'
     | '/reports/monthly-revenue'
     | '/reports/sales-summary'
     | '/reports/stock-levels'
@@ -274,7 +307,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/(app)'
     | '/accept-invite'
-    | '/admin'
+    | '/super-admin'
+    | '/(app)/admin'
     | '/(app)/about'
     | '/(app)/analytics'
     | '/(app)/dashboard'
@@ -291,6 +325,8 @@ export interface FileRouteTypes {
     | '/(auth)/login'
     | '/(auth)/signup'
     | '/(app)/'
+    | '/(app)/admin/floor-plan'
+    | '/(app)/admin/modifiers'
     | '/(app)/reports/monthly-revenue'
     | '/(app)/reports/sales-summary'
     | '/(app)/reports/stock-levels'
@@ -300,18 +336,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   appRouteRoute: typeof appRouteRouteWithChildren
   AcceptInviteRoute: typeof AcceptInviteRoute
-  AdminRoute: typeof AdminRoute
+  SuperAdminRoute: typeof SuperAdminRoute
   authLoginRoute: typeof authLoginRoute
   authSignupRoute: typeof authSignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/super-admin': {
+      id: '/super-admin'
+      path: '/super-admin'
+      fullPath: '/super-admin'
+      preLoaderRoute: typeof SuperAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accept-invite': {
@@ -440,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAboutRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/admin': {
+      id: '/(app)/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof appAdminRouteRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/(app)/reports/': {
       id: '/(app)/reports/'
       path: '/'
@@ -468,8 +511,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appReportsMonthlyRevenueRouteImport
       parentRoute: typeof appReportsRoute
     }
+    '/(app)/admin/modifiers': {
+      id: '/(app)/admin/modifiers'
+      path: '/modifiers'
+      fullPath: '/admin/modifiers'
+      preLoaderRoute: typeof appAdminModifiersRouteImport
+      parentRoute: typeof appAdminRouteRoute
+    }
+    '/(app)/admin/floor-plan': {
+      id: '/(app)/admin/floor-plan'
+      path: '/floor-plan'
+      fullPath: '/admin/floor-plan'
+      preLoaderRoute: typeof appAdminFloorPlanRouteImport
+      parentRoute: typeof appAdminRouteRoute
+    }
   }
 }
+
+interface appAdminRouteRouteChildren {
+  appAdminFloorPlanRoute: typeof appAdminFloorPlanRoute
+  appAdminModifiersRoute: typeof appAdminModifiersRoute
+}
+
+const appAdminRouteRouteChildren: appAdminRouteRouteChildren = {
+  appAdminFloorPlanRoute: appAdminFloorPlanRoute,
+  appAdminModifiersRoute: appAdminModifiersRoute,
+}
+
+const appAdminRouteRouteWithChildren = appAdminRouteRoute._addFileChildren(
+  appAdminRouteRouteChildren,
+)
 
 interface appReportsRouteChildren {
   appReportsMonthlyRevenueRoute: typeof appReportsMonthlyRevenueRoute
@@ -490,6 +561,7 @@ const appReportsRouteWithChildren = appReportsRoute._addFileChildren(
 )
 
 interface appRouteRouteChildren {
+  appAdminRouteRoute: typeof appAdminRouteRouteWithChildren
   appAboutRoute: typeof appAboutRoute
   appAnalyticsRoute: typeof appAnalyticsRoute
   appDashboardRoute: typeof appDashboardRoute
@@ -507,6 +579,7 @@ interface appRouteRouteChildren {
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
+  appAdminRouteRoute: appAdminRouteRouteWithChildren,
   appAboutRoute: appAboutRoute,
   appAnalyticsRoute: appAnalyticsRoute,
   appDashboardRoute: appDashboardRoute,
@@ -530,7 +603,7 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
   AcceptInviteRoute: AcceptInviteRoute,
-  AdminRoute: AdminRoute,
+  SuperAdminRoute: SuperAdminRoute,
   authLoginRoute: authLoginRoute,
   authSignupRoute: authSignupRoute,
 }

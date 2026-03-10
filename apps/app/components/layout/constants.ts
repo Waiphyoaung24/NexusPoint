@@ -7,6 +7,8 @@ import {
   FileText,
   Home,
   Utensils,
+  SlidersHorizontal,
+  LayoutGrid,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -38,6 +40,21 @@ export const sidebarSections: NavSection[] = [
       { icon: Book, labelKey: "nav.inventory", to: "/inventory" },
       { icon: FileText, labelKey: "nav.reports", to: "/reports" },
       { icon: Settings, labelKey: "nav.settings", to: "/settings" },
+    ],
+  },
+  {
+    titleKey: "nav.configuration",
+    items: [
+      {
+        icon: SlidersHorizontal,
+        labelKey: "nav.modifiers",
+        to: "/admin/modifiers",
+      },
+      {
+        icon: LayoutGrid,
+        labelKey: "nav.floorPlan",
+        to: "/admin/floor-plan",
+      },
     ],
   },
 ];

@@ -10,7 +10,10 @@
     "integrations": "Integrations",
     "syncLogs": "Sync Logs",
     "bridgeIntegration": "{{appName}}",
-    "management": "Management"
+    "management": "Management",
+    "configuration": "Configuration",
+    "modifiers": "Modifier Groups",
+    "menu": "Menu"
   },
   "header": {
     "selectBranch": "Select a branch",

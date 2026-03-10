@@ -151,6 +151,8 @@
     ]
   },
   "dependencies": {
+    "@dnd-kit/core": "^5",
+    "@dnd-kit/utilities": "^3.2.0",
     "@types/recharts": "^2.0.1",
     "app": "^0.1.0",
     "recharts": "^3.7.0"

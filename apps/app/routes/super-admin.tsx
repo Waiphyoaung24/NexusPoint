@@ -42,7 +42,7 @@ import { getCachedSession, sessionQueryOptions } from "@/lib/queries/session";
 
 const ADMIN_EMAIL = "nexuslab.dev.mm@gmail.com";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/super-admin")({
   beforeLoad: async ({ context }) => {
     let session = getCachedSession(context.queryClient);
 
@@ -177,7 +177,6 @@ function AdminPanel() {
           <span className="font-medium text-foreground">{ADMIN_EMAIL}</span>
         </div>
       </header>
-
       <main className="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
         {/* Actions Bar */}
         <div className="flex justify-end gap-3">
