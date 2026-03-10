@@ -29,31 +29,12 @@ export function useBranchAutoSelect() {
   useEffect(() => {
     if (!activeOrgId || !branches?.length) return;
 
-    // Scenario 1 & 3: No branch selected at all
-    if (!currentBranch) {
-      const first = branches[0];
-      setCurrentBranch({
-        id: first.id,
-        name: first.name,
-        organizationId: first.organizationId,
-      });
-      return;
-    }
+    const needsAutoSelect =
+      !currentBranch ||
+      currentBranch.organizationId !== activeOrgId ||
+      !branches.some((b) => b.id === currentBranch.id);
 
-    // Scenario 2: Branch belongs to a different org
-    if (currentBranch.organizationId !== activeOrgId) {
-      const first = branches[0];
-      setCurrentBranch({
-        id: first.id,
-        name: first.name,
-        organizationId: first.organizationId,
-      });
-      return;
-    }
-
-    // Scenario 3 (edge): Stored branch no longer exists in this org's branches
-    const stillExists = branches.some((b) => b.id === currentBranch.id);
-    if (!stillExists) {
+    if (needsAutoSelect) {
       const first = branches[0];
       setCurrentBranch({
         id: first.id,
