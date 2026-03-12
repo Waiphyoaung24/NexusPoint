@@ -15,9 +15,9 @@
   "vars": {
     "ENVIRONMENT": "production",
     "APP_NAME": "Example",
-    "APP_ORIGIN": "https://420man.store",
-    "ALLOWED_ORIGINS": "https://420man.store",
-    "RESEND_EMAIL_FROM": "noreply@420man.store"
+    "APP_ORIGIN": "https://nexuslab.asia",
+    "ALLOWED_ORIGINS": "https://nexuslab.asia",
+    "RESEND_EMAIL_FROM": "noreply@nexuslab.asia"
   },
   // prettier-ignore
   "hyperdrive": [
@@ -35,7 +35,7 @@
         "APP_NAME": "Example",
         "APP_ORIGIN": "http://localhost:5173",
         "ALLOWED_ORIGINS": "http://localhost:5173,http://127.0.0.1:5173",
-        "RESEND_EMAIL_FROM": "noreply@420man.store"
+        "RESEND_EMAIL_FROM": "noreply@nexuslab.asia"
       },
       // prettier-ignore
       "hyperdrive": [
@@ -51,9 +51,9 @@
       "vars": {
         "ENVIRONMENT": "staging",
         "APP_NAME": "Example",
-        "APP_ORIGIN": "https://staging.420man.store",
-        "ALLOWED_ORIGINS": "https://staging.420man.store",
-        "RESEND_EMAIL_FROM": "noreply@420man.store"
+        "APP_ORIGIN": "https://staging.nexuslab.asia",
+        "ALLOWED_ORIGINS": "https://staging.nexuslab.asia",
+        "RESEND_EMAIL_FROM": "noreply@nexuslab.asia"
       },
       // prettier-ignore
       "hyperdrive": [
@@ -69,9 +69,9 @@
       "vars": {
         "ENVIRONMENT": "preview",
         "APP_NAME": "Example",
-        "APP_ORIGIN": "https://preview.420man.store",
-        "ALLOWED_ORIGINS": "https://preview.420man.store",
-        "RESEND_EMAIL_FROM": "noreply@420man.store"
+        "APP_ORIGIN": "https://preview.nexuslab.asia",
+        "ALLOWED_ORIGINS": "https://preview.nexuslab.asia",
+        "RESEND_EMAIL_FROM": "noreply@nexuslab.asia"
       },
       // prettier-ignore
       "hyperdrive": [

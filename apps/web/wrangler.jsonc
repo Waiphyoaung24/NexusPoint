@@ -32,7 +32,7 @@
   // Command: bun wrangler deploy
   // prettier-ignore
   "routes": [
-    { "pattern": "420man.store/*", "zone_name": "420man.store" }
+    { "pattern": "nexuslab.asia/*", "zone_name": "nexuslab.asia" }
   ],
   "vars": {
     "ENVIRONMENT": "production"
@@ -59,7 +59,7 @@
       },
       // prettier-ignore
       "routes": [
-        { "pattern": "staging.420man.store/*", "zone_name": "420man.store" }
+        { "pattern": "staging.nexuslab.asia/*", "zone_name": "nexuslab.asia" }
       ]
     },
 
@@ -75,7 +75,7 @@
       },
       // prettier-ignore
       "routes": [
-        { "pattern": "preview.420man.store/*", "zone_name": "420man.store" }
+        { "pattern": "preview.nexuslab.asia/*", "zone_name": "nexuslab.asia" }
       ]
     }
   }
