@@ -1,7 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { eq, and, desc } from "drizzle-orm";
-import { order, orderItem, orderItemModifier, member, branch } from "@repo/db";
+import {
+  order,
+  orderItem,
+  orderItemModifier,
+  member,
+  branch,
+  restaurantTable,
+} from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
 
@@ -61,6 +68,11 @@ export const orderRouter = router({
         branchId: z.string().optional(),
         externalOrderId: z.string().optional(),
         source: z.enum(["pos", "grab", "wongnai", "lineman"]).default("pos"),
+        orderType: z.enum(["dine_in", "takeaway", "delivery"]).optional(),
+        tableId: z.string().uuid().optional(),
+        createdBy: z.string().uuid().optional(),
+        vatAmount: z.string().optional(),
+        vatRate: z.string().optional().default("7.00"),
         customerName: z.string().optional(),
         customerPhone: z.string().optional(),
         items: z.array(orderItemSchema).min(1),
@@ -93,6 +105,11 @@ export const orderRouter = router({
             branchId: resolvedBranchId,
             externalOrderId: input.externalOrderId,
             source: input.source,
+            orderType: input.orderType,
+            tableId: input.tableId,
+            createdBy: input.createdBy ?? ctx.user.id,
+            vatAmount: input.vatAmount,
+            vatRate: input.vatRate,
             customerName: input.customerName,
             customerPhone: input.customerPhone,
             items: input.items,
@@ -129,6 +146,14 @@ export const orderRouter = router({
               })),
             );
           }
+        }
+
+        // Mark table as occupied for dine-in orders
+        if (input.tableId && input.orderType === "dine_in") {
+          await tx
+            .update(restaurantTable)
+            .set({ status: "occupied", updatedAt: new Date() })
+            .where(eq(restaurantTable.id, input.tableId));
         }
 
         return inserted;
