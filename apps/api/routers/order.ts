@@ -52,7 +52,7 @@ const orderItemModifierSchema = z.object({
 });
 
 const orderItemSchema = z.object({
-  menuItemId: z.string(),
+  menuItemId: z.string().optional(),
   name: z.string(),
   quantity: z.number().int().positive(),
   price: z.string(),
@@ -127,7 +127,7 @@ export const orderRouter = router({
             .values({
               orderId: inserted.id,
               organizationId: orgId,
-              menuItemId: item.menuItemId,
+              menuItemId: item.menuItemId ?? null,
               name: item.name,
               quantity: item.quantity,
               unitPrice: item.price,

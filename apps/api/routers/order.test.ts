@@ -139,6 +139,20 @@ describe("Order Router", () => {
       expect(result.status).toBe("pending");
     });
 
+    test("creates order with custom (no menuItemId) item", async () => {
+      const db = makeTxDb();
+      const caller = orderRouter.createCaller(makeCtx("org-123", db, db));
+      const result = await caller.create({
+        source: "pos",
+        items: [{ name: "Special Plate", quantity: 1, price: "99.00" }],
+        subtotal: "99.00",
+        total: "99.00",
+      });
+
+      expect(result).toBeDefined();
+      expect(result.id).toBeDefined();
+    });
+
     test("throws 400 when user has no organization", async () => {
       const mockDb = {
         select: () => ({

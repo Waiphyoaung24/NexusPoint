@@ -85,6 +85,14 @@ function LiveOrders() {
                         {order.customerName && (
                           <p className="text-sm">{order.customerName}</p>
                         )}
+                        {Array.isArray(order.items) &&
+                          order.items.some(
+                            (i: { menuItemId?: string }) => !i.menuItemId,
+                          ) && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                              Has Open Items
+                            </span>
+                          )}
                         <div className="flex items-center justify-between mt-2">
                           <span className="text-sm font-medium">
                             ฿{order.total}
