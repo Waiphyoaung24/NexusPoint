@@ -29,6 +29,7 @@ app.all("/signup*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/accept-invite*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/settings*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/admin*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
+app.all("/super-admin*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/analytics*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/reports*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
 app.all("/inventory*", (c) => c.env.APP_SERVICE.fetch(c.req.raw));
