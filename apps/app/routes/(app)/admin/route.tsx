@@ -1,5 +1,11 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { LayoutGrid, SlidersHorizontal, TableProperties } from "lucide-react";
+import {
+  LayoutGrid,
+  Shield,
+  SlidersHorizontal,
+  TableProperties,
+  Users,
+} from "lucide-react";
 
 export const Route = createFileRoute("/(app)/admin")({
   component: AdminLayout,
@@ -39,6 +45,28 @@ function AdminLayout() {
           >
             <TableProperties className="h-4 w-4" />
             Floor Plan
+          </Link>
+          <Link
+            to="/admin/staff"
+            className="flex items-center gap-2 px-4 py-2 border-b-2 border-transparent text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{
+              className:
+                "flex items-center gap-2 px-4 py-2 border-b-2 border-primary text-sm font-medium text-foreground",
+            }}
+          >
+            <Users className="h-4 w-4" />
+            Staff
+          </Link>
+          <Link
+            to="/admin/permissions"
+            className="flex items-center gap-2 px-4 py-2 border-b-2 border-transparent text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{
+              className:
+                "flex items-center gap-2 px-4 py-2 border-b-2 border-primary text-sm font-medium text-foreground",
+            }}
+          >
+            <Shield className="h-4 w-4" />
+            Permissions
           </Link>
         </nav>
       </div>
