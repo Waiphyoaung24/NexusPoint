@@ -1,7 +1,14 @@
 // Multi-tenant organizations and memberships with role-based access control
 
 import { relations, sql } from "drizzle-orm";
-import { index, pgTable, text, timestamp, unique } from "drizzle-orm/pg-core";
+import {
+  index,
+  numeric,
+  pgTable,
+  text,
+  timestamp,
+  unique,
+} from "drizzle-orm/pg-core";
 import { user } from "./user";
 
 /**
@@ -16,6 +23,7 @@ export const organization = pgTable("organization", {
   slug: text().notNull().unique(),
   logo: text(),
   metadata: text(), // Better Auth expects string (JSON serialized)
+  vatRate: numeric({ precision: 5, scale: 2 }).default("7.00").notNull(), // F-007: configurable VAT rate (default Thai 7%)
   createdAt: timestamp({ withTimezone: true, mode: "date" })
     .defaultNow()
     .notNull(),

@@ -9,6 +9,7 @@ import {
   branch,
   restaurantTable,
   voidLog,
+  discountLog,
 } from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
@@ -359,6 +360,78 @@ export const orderRouter = router({
         });
 
         return cancelled;
+      });
+    }),
+
+  // F-008: Apply percentage discount to an order
+  applyDiscount: protectedProcedure
+    .input(
+      z.object({
+        orderId: z.string(),
+        discountPercent: z.number().min(0).max(100),
+        reason: z.string().optional(),
+        requesterId: z.string(),
+        approverId: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const orgId = await getOrganizationId(ctx);
+
+      return ctx.dbDirect.transaction(async (tx) => {
+        // 1. Fetch order
+        const [existing] = await tx
+          .select()
+          .from(order)
+          .where(
+            and(eq(order.id, input.orderId), eq(order.organizationId, orgId)),
+          )
+          .limit(1);
+
+        if (!existing) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Order not found",
+          });
+        }
+
+        // 2. Calculate discount
+        const subtotal = parseFloat(existing.subtotal ?? existing.total ?? "0");
+        const discountAmount = subtotal * (input.discountPercent / 100);
+        const taxableAmount = subtotal - discountAmount;
+        const vatRate = parseFloat(existing.vatRate ?? "7.00");
+        const vatAmount = taxableAmount * (vatRate / 100);
+        const newTotal = taxableAmount + vatAmount;
+
+        // 3. Update order
+        const [updated] = await tx
+          .update(order)
+          .set({
+            discountAmount: discountAmount.toFixed(2),
+            discount: input.discountPercent.toFixed(2),
+            vatAmount: vatAmount.toFixed(2),
+            total: newTotal.toFixed(2),
+          })
+          .where(eq(order.id, input.orderId))
+          .returning();
+
+        // 4. Create audit log
+        await tx.insert(discountLog).values({
+          organizationId: orgId,
+          branchId: existing.branchId,
+          orderId: input.orderId,
+          requesterId: input.requesterId,
+          approverId: input.approverId,
+          discountType: "percentage",
+          discountValue: input.discountPercent.toFixed(2),
+          discountAmount: discountAmount.toFixed(2),
+          reason: input.reason,
+        });
+
+        return {
+          discountAmount: discountAmount.toFixed(2),
+          newTotal: newTotal.toFixed(2),
+          order: updated,
+        };
       });
     }),
 });

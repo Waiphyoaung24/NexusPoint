@@ -81,6 +81,68 @@ export const organizationRouter = router({
       return newOrg;
     }),
 
+  // F-007: Organization settings (VAT rate)
+  getSettings: protectedProcedure.query(async ({ ctx }) => {
+    const orgId = ctx.session.activeOrganizationId;
+    if (!orgId) {
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message: "No active organization",
+      });
+    }
+    const [org] = await ctx.db
+      .select({ vatRate: organization.vatRate })
+      .from(organization)
+      .where(eq(organization.id, orgId))
+      .limit(1);
+    if (!org) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Organization not found",
+      });
+    }
+    return { vatRate: parseFloat(org.vatRate) };
+  }),
+
+  updateSettings: protectedProcedure
+    .input(
+      z.object({
+        vatRate: z.number().min(0).max(100),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const orgId = ctx.session.activeOrganizationId;
+      if (!orgId) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "No active organization",
+        });
+      }
+      // Only owner/admin can update settings
+      const membership = await ctx.db
+        .select({ role: member.role })
+        .from(member)
+        .where(
+          and(eq(member.userId, ctx.user.id), eq(member.organizationId, orgId)),
+        )
+        .limit(1);
+      if (
+        !membership.length ||
+        !["owner", "admin"].includes(membership[0]!.role)
+      ) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Only owner/admin can update settings",
+        });
+      }
+      const [updated] = await ctx.db
+        .update(organization)
+        .set({ vatRate: input.vatRate.toFixed(2) })
+        .where(eq(organization.id, orgId))
+        .returning({ vatRate: organization.vatRate });
+      return { vatRate: parseFloat(updated.vatRate) };
+    }),
+
   update: protectedProcedure
     .input(
       z.object({

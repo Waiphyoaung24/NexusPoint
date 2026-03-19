@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -13,8 +13,17 @@ import {
   Switch,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, CreditCard, Palette, Shield, User, Upload } from "lucide-react";
+import {
+  Bell,
+  Calculator,
+  CreditCard,
+  Palette,
+  Shield,
+  User,
+  Upload,
+} from "lucide-react";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { trpcClient } from "../../lib/trpc";
 
 export const Route = createFileRoute("/(app)/settings")({
   component: Settings,
@@ -24,6 +33,32 @@ function Settings() {
   const { t } = useTranslation();
   const [promptPayId, setPromptPayId] = useState("");
   const [shopLogo, setShopLogo] = useState<string | null>(null);
+  const [vatRate, setVatRate] = useState(7.0);
+  const [vatSaving, setVatSaving] = useState(false);
+  const [vatMessage, setVatMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    trpcClient.organization.getSettings
+      .query()
+      .then((settings) => setVatRate(settings.vatRate))
+      .catch(() => {});
+  }, []);
+
+  const handleSaveVat = async () => {
+    setVatSaving(true);
+    setVatMessage(null);
+    try {
+      const result = await trpcClient.organization.updateSettings.mutate({
+        vatRate,
+      });
+      setVatRate(result.vatRate);
+      setVatMessage("VAT rate saved successfully");
+    } catch {
+      setVatMessage("Failed to save VAT rate");
+    } finally {
+      setVatSaving(false);
+    }
+  };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -125,6 +160,48 @@ function Settings() {
               </div>
             </div>
             <Button>{t("settings.saveChanges")}</Button>
+          </CardContent>
+        </Card>
+
+        {/* Tax Configuration (F-007) */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Calculator className="h-5 w-5" />
+              <CardTitle>Tax Configuration</CardTitle>
+            </div>
+            <CardDescription>
+              Configure VAT rate for your organization. Changes apply to new
+              orders only.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <Label htmlFor="vat-rate">VAT Rate (%)</Label>
+              <Input
+                id="vat-rate"
+                type="number"
+                min={0}
+                max={100}
+                step={0.01}
+                value={vatRate}
+                onChange={(e) => setVatRate(parseFloat(e.target.value) || 0)}
+              />
+              <p className="text-xs text-muted-foreground">
+                Thailand standard VAT is 7%. Set to 0% for VAT-exempt
+                businesses.
+              </p>
+            </div>
+            {vatMessage && (
+              <p
+                className={`text-sm ${vatMessage.includes("Failed") ? "text-destructive" : "text-green-600"}`}
+              >
+                {vatMessage}
+              </p>
+            )}
+            <Button onClick={handleSaveVat} disabled={vatSaving}>
+              {vatSaving ? "Saving..." : "Save VAT Rate"}
+            </Button>
           </CardContent>
         </Card>
 
