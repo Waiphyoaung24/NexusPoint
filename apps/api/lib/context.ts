@@ -2,6 +2,7 @@ import type { DatabaseSchema } from "@repo/db";
 import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import type { Resend } from "resend";
+import type { BranchMember } from "@repo/db";
 import type { Auth, AuthSession, AuthUser } from "./auth.js";
 import type { Env } from "./env.js";
 
@@ -57,6 +58,15 @@ export type TRPCContext = {
 
   /** Environment variables and secrets */
   env: Env;
+
+  /** POS branch membership for the active branch (F-009, populated by middleware) */
+  branchMember: BranchMember | null;
+
+  /** Shortcut to user's POS role at the active branch (F-009) */
+  staffRole: string | null;
+
+  /** Whether the current action requires Manager PIN approval (F-009) */
+  permissionRequiresPin: boolean;
 };
 
 /**

@@ -259,4 +259,174 @@ describe("Order Router", () => {
       ).rejects.toThrow(TRPCError);
     });
   });
+
+  describe("voidItem", () => {
+    test("voids a single item and creates void_log entry", async () => {
+      let insertedVoidLog: Record<string, unknown> | null = null;
+      let updatedOrderItem: Record<string, unknown> | null = null;
+      let _updatedOrder: Record<string, unknown> | null = null;
+
+      const mockTx = {
+        insert: (_table: unknown) => ({
+          values: (values: Record<string, unknown>) => {
+            insertedVoidLog = values;
+            return {
+              returning: () => Promise.resolve([{ id: "void-1", ...values }]),
+            };
+          },
+        }),
+        update: (_table: unknown) => ({
+          set: (values: Record<string, unknown>) => {
+            if ("isVoided" in values) {
+              updatedOrderItem = values;
+            } else if ("total" in values) {
+              _updatedOrder = values;
+            }
+            return {
+              where: () => ({
+                returning: () =>
+                  Promise.resolve([{ id: "order-item-1", ...values }]),
+              }),
+            };
+          },
+        }),
+        select: () => ({
+          from: () => ({
+            where: () =>
+              Promise.resolve([
+                { ...mockOrderItem, isVoided: false },
+                {
+                  ...mockOrderItem,
+                  id: "order-item-2",
+                  unitPrice: "50.00",
+                  subtotal: "50.00",
+                },
+              ]),
+          }),
+        }),
+      };
+
+      const db = {
+        select: () => ({
+          from: () => ({
+            where: () => ({
+              limit: () => Promise.resolve([{ organizationId: "org-123" }]),
+            }),
+          }),
+        }),
+      };
+
+      const dbDirect = {
+        transaction: async (fn: (tx: typeof mockTx) => Promise<unknown>) => {
+          return fn(mockTx);
+        },
+      };
+
+      const ctx = makeCtx("org-123", db, dbDirect);
+      const caller = orderRouter.createCaller(ctx);
+
+      await caller.voidItem({
+        orderItemId: "order-item-1",
+        orderId: "order-1",
+        reason: "Customer changed mind",
+        requesterId: "user-1",
+        approverId: "manager-1",
+      });
+
+      expect(insertedVoidLog).toBeTruthy();
+      expect(insertedVoidLog!.voidType).toBe("item");
+      expect(insertedVoidLog!.orderItemId).toBe("order-item-1");
+      expect(insertedVoidLog!.reason).toBe("Customer changed mind");
+      expect(updatedOrderItem!.isVoided).toBe(true);
+    });
+
+    test("rejects void for non-existent order", async () => {
+      const db = {
+        select: () => ({
+          from: () => ({
+            where: () => ({
+              limit: () => Promise.resolve([]),
+            }),
+          }),
+        }),
+      };
+
+      const ctx = makeCtx("org-123", db);
+      const caller = orderRouter.createCaller(ctx);
+
+      await expect(
+        caller.voidItem({
+          orderItemId: "x",
+          orderId: "x",
+          reason: "test",
+          requesterId: "user-1",
+        }),
+      ).rejects.toThrow(TRPCError);
+    });
+  });
+
+  describe("voidOrder", () => {
+    test("cancels order, voids all items, and creates void_log", async () => {
+      let insertedVoidLog: Record<string, unknown> | null = null;
+      let updatedOrder: Record<string, unknown> | null = null;
+      let voidedAllItems = false;
+
+      const mockTx = {
+        insert: (_table: unknown) => ({
+          values: (values: Record<string, unknown>) => {
+            insertedVoidLog = values;
+            return {
+              returning: () => Promise.resolve([{ id: "void-2", ...values }]),
+            };
+          },
+        }),
+        update: (_table: unknown) => ({
+          set: (values: Record<string, unknown>) => {
+            if ("status" in values && values.status === "cancelled") {
+              updatedOrder = values;
+            }
+            if ("isVoided" in values) {
+              voidedAllItems = true;
+            }
+            return {
+              where: () => ({
+                returning: () =>
+                  Promise.resolve([{ id: "order-1", ...values }]),
+              }),
+            };
+          },
+        }),
+      };
+
+      const db = {
+        select: () => ({
+          from: () => ({
+            where: () => ({
+              limit: () => Promise.resolve([{ organizationId: "org-123" }]),
+            }),
+          }),
+        }),
+      };
+
+      const dbDirect = {
+        transaction: async (fn: (tx: typeof mockTx) => Promise<unknown>) =>
+          fn(mockTx),
+      };
+
+      const ctx = makeCtx("org-123", db, dbDirect);
+      const caller = orderRouter.createCaller(ctx);
+
+      await caller.voidOrder({
+        orderId: "order-1",
+        reason: "Wrong table",
+        requesterId: "user-1",
+        approverId: "manager-1",
+      });
+
+      expect(updatedOrder).toBeTruthy();
+      expect(updatedOrder!.status).toBe("cancelled");
+      expect(insertedVoidLog!.voidType).toBe("order");
+      expect(voidedAllItems).toBe(true);
+    });
+  });
 });

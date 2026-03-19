@@ -15,6 +15,8 @@ import { dashboardRouter } from "../routers/dashboard.js";
 import { menuRouter } from "../routers/menu.js";
 import { modifierRouter } from "../routers/modifier.js";
 import { orderRouter } from "../routers/order.js";
+import { permissionRouter } from "../routers/permission.js";
+import { staffRouter } from "../routers/staff.js";
 import { tableRouter } from "../routers/table.js";
 
 // tRPC API router
@@ -26,6 +28,8 @@ const appRouter = router({
   menu: menuRouter,
   modifier: modifierRouter,
   order: orderRouter,
+  permission: permissionRouter,
+  staff: staffRouter,
   table: tableRouter,
 });
 
@@ -103,6 +107,9 @@ app.use("/api/trpc/*", (c) => {
         session: sessionData?.session ?? null,
         user: sessionData?.user ?? null,
         cache: new Map(),
+        branchMember: null,
+        staffRole: null,
+        permissionRequiresPin: false,
       };
     },
     batching: {

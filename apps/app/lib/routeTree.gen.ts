@@ -33,6 +33,8 @@ import { Route as appReportsIndexRouteImport } from './../routes/(app)/reports/i
 import { Route as appReportsStockLevelsRouteImport } from './../routes/(app)/reports/stock-levels'
 import { Route as appReportsSalesSummaryRouteImport } from './../routes/(app)/reports/sales-summary'
 import { Route as appReportsMonthlyRevenueRouteImport } from './../routes/(app)/reports/monthly-revenue'
+import { Route as appAdminStaffRouteImport } from './../routes/(app)/admin/staff'
+import { Route as appAdminPermissionsRouteImport } from './../routes/(app)/admin/permissions'
 import { Route as appAdminModifiersRouteImport } from './../routes/(app)/admin/modifiers'
 import { Route as appAdminFloorPlanRouteImport } from './../routes/(app)/admin/floor-plan'
 
@@ -156,6 +158,16 @@ const appReportsMonthlyRevenueRoute =
     path: '/monthly-revenue',
     getParentRoute: () => appReportsRoute,
   } as any)
+const appAdminStaffRoute = appAdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => appAdminRouteRoute,
+} as any)
+const appAdminPermissionsRoute = appAdminPermissionsRouteImport.update({
+  id: '/permissions',
+  path: '/permissions',
+  getParentRoute: () => appAdminRouteRoute,
+} as any)
 const appAdminModifiersRoute = appAdminModifiersRouteImport.update({
   id: '/modifiers',
   path: '/modifiers',
@@ -189,6 +201,8 @@ export interface FileRoutesByFullPath {
   '/': typeof appIndexRoute
   '/admin/floor-plan': typeof appAdminFloorPlanRoute
   '/admin/modifiers': typeof appAdminModifiersRoute
+  '/admin/permissions': typeof appAdminPermissionsRoute
+  '/admin/staff': typeof appAdminStaffRoute
   '/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -215,6 +229,8 @@ export interface FileRoutesByTo {
   '/': typeof appIndexRoute
   '/admin/floor-plan': typeof appAdminFloorPlanRoute
   '/admin/modifiers': typeof appAdminModifiersRoute
+  '/admin/permissions': typeof appAdminPermissionsRoute
+  '/admin/staff': typeof appAdminStaffRoute
   '/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -244,6 +260,8 @@ export interface FileRoutesById {
   '/(app)/': typeof appIndexRoute
   '/(app)/admin/floor-plan': typeof appAdminFloorPlanRoute
   '/(app)/admin/modifiers': typeof appAdminModifiersRoute
+  '/(app)/admin/permissions': typeof appAdminPermissionsRoute
+  '/(app)/admin/staff': typeof appAdminStaffRoute
   '/(app)/reports/monthly-revenue': typeof appReportsMonthlyRevenueRoute
   '/(app)/reports/sales-summary': typeof appReportsSalesSummaryRoute
   '/(app)/reports/stock-levels': typeof appReportsStockLevelsRoute
@@ -273,6 +291,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/floor-plan'
     | '/admin/modifiers'
+    | '/admin/permissions'
+    | '/admin/staff'
     | '/reports/monthly-revenue'
     | '/reports/sales-summary'
     | '/reports/stock-levels'
@@ -299,6 +319,8 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/floor-plan'
     | '/admin/modifiers'
+    | '/admin/permissions'
+    | '/admin/staff'
     | '/reports/monthly-revenue'
     | '/reports/sales-summary'
     | '/reports/stock-levels'
@@ -327,6 +349,8 @@ export interface FileRouteTypes {
     | '/(app)/'
     | '/(app)/admin/floor-plan'
     | '/(app)/admin/modifiers'
+    | '/(app)/admin/permissions'
+    | '/(app)/admin/staff'
     | '/(app)/reports/monthly-revenue'
     | '/(app)/reports/sales-summary'
     | '/(app)/reports/stock-levels'
@@ -511,6 +535,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appReportsMonthlyRevenueRouteImport
       parentRoute: typeof appReportsRoute
     }
+    '/(app)/admin/staff': {
+      id: '/(app)/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof appAdminStaffRouteImport
+      parentRoute: typeof appAdminRouteRoute
+    }
+    '/(app)/admin/permissions': {
+      id: '/(app)/admin/permissions'
+      path: '/permissions'
+      fullPath: '/admin/permissions'
+      preLoaderRoute: typeof appAdminPermissionsRouteImport
+      parentRoute: typeof appAdminRouteRoute
+    }
     '/(app)/admin/modifiers': {
       id: '/(app)/admin/modifiers'
       path: '/modifiers'
@@ -531,11 +569,15 @@ declare module '@tanstack/react-router' {
 interface appAdminRouteRouteChildren {
   appAdminFloorPlanRoute: typeof appAdminFloorPlanRoute
   appAdminModifiersRoute: typeof appAdminModifiersRoute
+  appAdminPermissionsRoute: typeof appAdminPermissionsRoute
+  appAdminStaffRoute: typeof appAdminStaffRoute
 }
 
 const appAdminRouteRouteChildren: appAdminRouteRouteChildren = {
   appAdminFloorPlanRoute: appAdminFloorPlanRoute,
   appAdminModifiersRoute: appAdminModifiersRoute,
+  appAdminPermissionsRoute: appAdminPermissionsRoute,
+  appAdminStaffRoute: appAdminStaffRoute,
 }
 
 const appAdminRouteRouteWithChildren = appAdminRouteRoute._addFileChildren(

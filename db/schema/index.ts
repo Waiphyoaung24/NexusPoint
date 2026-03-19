@@ -18,3 +18,7 @@ export * from "./floor-plan"; // table, reservation
 export * from "./order-item"; // order_item, order_item_modifier, staff_role enum, order_type enum
 export * from "./audit-log"; // discount_log, void_log, z_report
 export * from "./combo-pricing-recipe"; // combo_meal, combo_item, pricing_schedule, pricing_schedule_item, recipe
+
+// F-009: 5-Role Permission Matrix
+export * from "./branch-member"; // branch_member (per-branch staff role assignment)
+export * from "./role-permission"; // role_permission (configurable permission matrix)

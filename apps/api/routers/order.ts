@@ -8,6 +8,7 @@ import {
   member,
   branch,
   restaurantTable,
+  voidLog,
 } from "@repo/db";
 import { router, protectedProcedure } from "../lib/trpc.js";
 import type { TRPCContext } from "../lib/context.js";
@@ -240,5 +241,124 @@ export const orderRouter = router({
       }
 
       return updated;
+    }),
+
+  // Void a single order item — marks isVoided, creates void_log, recalculates total
+  voidItem: protectedProcedure
+    .input(
+      z.object({
+        orderItemId: z.string(),
+        orderId: z.string(),
+        reason: z.string().optional(),
+        requesterId: z.string(),
+        approverId: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const orgId = await getOrganizationId(ctx);
+
+      return ctx.dbDirect.transaction(async (tx) => {
+        // 1. Mark item as voided
+        const [voided] = await tx
+          .update(orderItem)
+          .set({ isVoided: true })
+          .where(
+            and(
+              eq(orderItem.id, input.orderItemId),
+              eq(orderItem.orderId, input.orderId),
+            ),
+          )
+          .returning();
+
+        if (!voided) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Order item not found",
+          });
+        }
+
+        // 2. Create void log
+        await tx.insert(voidLog).values({
+          organizationId: orgId,
+          orderId: input.orderId,
+          orderItemId: input.orderItemId,
+          requesterId: input.requesterId,
+          approverId: input.approverId,
+          voidType: "item",
+          reason: input.reason,
+        });
+
+        // 3. Recalculate order total from non-voided items
+        const remainingItems = await tx
+          .select()
+          .from(orderItem)
+          .where(
+            and(
+              eq(orderItem.orderId, input.orderId),
+              eq(orderItem.isVoided, false),
+            ),
+          );
+
+        const newTotal = remainingItems
+          .reduce((sum, i) => sum + parseFloat(i.subtotal), 0)
+          .toFixed(2);
+
+        await tx
+          .update(order)
+          .set({ total: newTotal })
+          .where(eq(order.id, input.orderId));
+
+        return { voidedItemId: input.orderItemId, newTotal };
+      });
+    }),
+
+  // Cancel entire order — sets status to cancelled, voids all items, creates void_log
+  voidOrder: protectedProcedure
+    .input(
+      z.object({
+        orderId: z.string(),
+        reason: z.string().optional(),
+        requesterId: z.string(),
+        approverId: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const orgId = await getOrganizationId(ctx);
+
+      return ctx.dbDirect.transaction(async (tx) => {
+        // 1. Set order status to cancelled
+        const [cancelled] = await tx
+          .update(order)
+          .set({ status: "cancelled", total: "0" })
+          .where(
+            and(eq(order.id, input.orderId), eq(order.organizationId, orgId)),
+          )
+          .returning();
+
+        if (!cancelled) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Order not found",
+          });
+        }
+
+        // 2. Void all items
+        await tx
+          .update(orderItem)
+          .set({ isVoided: true })
+          .where(eq(orderItem.orderId, input.orderId));
+
+        // 3. Create void log
+        await tx.insert(voidLog).values({
+          organizationId: orgId,
+          orderId: input.orderId,
+          requesterId: input.requesterId,
+          approverId: input.approverId,
+          voidType: "order",
+          reason: input.reason,
+        });
+
+        return cancelled;
+      });
     }),
 });
