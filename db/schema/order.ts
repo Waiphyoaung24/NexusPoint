@@ -118,6 +118,11 @@ export const order = pgTable(
     vatAmount: numeric({ precision: 10, scale: 2 }),
     vatRate: numeric({ precision: 5, scale: 2 }).default("7.00"),
     tipAmount: numeric({ precision: 10, scale: 2 }),
+    // F-006: Payment method tracking
+    paymentMethod: text(), // Primary method: "cash", "promptpay", "card"
+    payments: jsonb().$type<Array<{ method: string; amount: string }>>(), // Split payments: [{method: "cash", amount: "500.00"}, {method: "promptpay", amount: "463.00"}]
+    tenderedAmount: numeric({ precision: 10, scale: 2 }), // Cash tendered
+    changeAmount: numeric({ precision: 10, scale: 2 }), // Change given
   },
   (table) => [
     index("order_organization_id_idx").on(table.organizationId),

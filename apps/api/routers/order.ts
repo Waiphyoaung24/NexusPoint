@@ -80,8 +80,24 @@ export const orderRouter = router({
         items: z.array(orderItemSchema).min(1),
         subtotal: z.string(),
         discount: z.string().optional(),
+        discountAmount: z.string().optional(),
         total: z.string(),
         notes: z.string().optional(),
+        // F-006: Payment fields
+        paymentMethod: z
+          .enum(["cash", "promptpay", "card"])
+          .optional()
+          .default("cash"),
+        payments: z
+          .array(
+            z.object({
+              method: z.enum(["cash", "promptpay", "card"]),
+              amount: z.string(),
+            }),
+          )
+          .optional(),
+        tenderedAmount: z.string().optional(),
+        changeAmount: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -117,8 +133,13 @@ export const orderRouter = router({
             items: input.items,
             subtotal: input.subtotal,
             discount: input.discount ?? "0",
+            discountAmount: input.discountAmount,
             total: input.total,
             notes: input.notes,
+            paymentMethod: input.paymentMethod,
+            payments: input.payments,
+            tenderedAmount: input.tenderedAmount,
+            changeAmount: input.changeAmount,
           })
           .returning();
 
