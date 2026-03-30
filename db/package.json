@@ -44,6 +44,6 @@
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "postgres": "^3.4.5",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.2"
   }
 }
